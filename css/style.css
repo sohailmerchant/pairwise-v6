@@ -1,0 +1,316 @@
+body {
+  font-size: 11px ;
+  font-family: 'Amiri', Arial, Helvetica, sans-serif  ;
+}
+.container{
+
+  padding: 0px 0px;
+}
+* Style the header with a grey background and some padding */
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+  height: 30px;
+
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 14px; 
+  line-height: 15px;
+  border-radius: 0px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 15px;
+  font-weight: bold;
+ 
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+
+
+.book-title, .book-author, .book-url, .book-uri, .word-count{
+
+  margin: 0;
+    padding: 0;
+}
+.chart-box {
+  border: 1px solid #d0d0d0;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px ;
+}
+
+.upload-book
+{
+
+  width: 100%;
+  background-color: #f8f8fa;
+  height: 30px;
+  padding: 15px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.tick line {
+  stroke: none;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 5, 5;
+}
+
+.domain {
+  stroke-width: 3;
+  stroke: #FFCC66;
+}
+
+.connection {
+  fill: none;
+}
+
+.bar {
+  stroke: red;
+}
+
+.brush .extent {
+  stroke: gray;
+  fill: blue;
+  fill-opacity: .165;
+}
+
+.brush .overlay {
+  cursor: auto !important;
+}
+
+.max-reference-lines {
+  stroke-width: 5;
+  stroke: black;
+}
+
+.dotted-bar-lines {
+  stroke-dasharray: 3 6;
+  stroke: red;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 130px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0;
+  border-radius: 8px;
+  line-height: 18px;
+  margin-left: 6px;
+}
+.books-details{
+  float:left;
+  border: 0px red solid;
+  width: 48.5%;
+  
+  
+}
+
+.books-details-container{
+
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+  float: left;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: #e0e0e0 1px dashed;
+}
+
+
+/*--Books View Bottom Panel -- [START]--*/
+
+#bottomPanelRaw {
+  margin-top: 10px;
+  border-bottom: 1px #e0e0e0 dashed;
+  direction: rtl;
+ 
+}
+.panel {
+  bdackground-image: url(../Images/icons/education31.png);
+  background-position: 10px 6px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+
+
+}
+
+.book-reader{
+  height: 550px;
+  background-color:#fcfcfc;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-bottom: 20px;
+  bdorder: 1px dashed #dbdbdb;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+}
+
+.label{
+
+  padding-left: 5px;
+  display: block;
+  font-size: 13px;
+}
+.selection-chunk{
+
+  direction: rtl;
+}
+
+.book-content {
+  padding-left: 5px;
+  padding-right: 5px;
+  transition: 0.3s;
+  width: calc(50% - 14px);
+  height: calc(100% - 125px);
+  /*color: #afafaf;*/
+  font-size: 17px;
+  display: inline-block;
+  overflow-y: auto;
+  vertical-align: top;
+  border-bottom: 0px #e0e0e0 solid;
+  background-color: #fff;
+ 
+
+}
+
+.book-text{
+  direction: rtl;
+}
+
+.book-reader .closebtn {
+  color: #818181;
+  font-size: 36px;
+  padding: 2px 5px;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  text-align: right;
+  margin-bottom: -48px;
+}
+
+.book-reader a.closebtn:hover {
+  color: #e0e0e0;
+}
+
+/*#main {
+  transition: margin-left 0.5s;
+  padding: 10px;
+}*/
+
+@media screen and (max-height: 450px) {
+  .book-reader .book-content {
+    font-size: 12px;
+  }
+}
+
+/*--Books View Bottom Panel -- [END]--*/
+
+h1 {
+  font-size: 20px !important;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /*header-level: 1 to 5*/
+  font-size: 28px !important;
+}
+
+h2 {
+  color: red;
+}
+
+h3 {
+  color: orange;
+}
+
+h4 {
+  color: yellow;
+}
+
+h5 {
+  color: green;
+}
+
+h6 {
+  color: blue;
+}
+
+selection,
+.selected-para-label {
+  background-color: yellow;
+}
+
+.booktitle{
+direction: ltr;
+text-align: right
+
+}
+
+.difference-deletion {
+  color: #db4437;
+  
+}
+
+.difference-addition {
+  color: #5cb85c;
+}
+.bulk-read{
+
+  text-align: right;
+}
+
+.loader-btn-wrapper {
+  margin: 10px 0 10px;
+  width: calc(50% - 2px);
+  display: inline-block;
+}
+
+.loader-btn {
+  width: 30%;
+  border-radius: 2px;
+  margin: 0 auto;
+  padding: 10px 0;
+  display: block;
+  background: #219150;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.loader-btn:hover {
+  background: green;
+}
