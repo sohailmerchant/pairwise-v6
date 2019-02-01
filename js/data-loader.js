@@ -1,6 +1,6 @@
 (function (exports) {
   'use strict';
-
+  //var IsColorMasking = false;
   var workerConfig = utils.pick([
     'page_chunk_count', 'forward_chunk_count', 'backward_chunk_count',
     'page_string_format', 'book_content_url', 'bookSequence'
@@ -14,6 +14,7 @@
   exports.loadBackwardContent = loadBackwardContent;
   exports.loadForwardContent = loadForwardContent;
   exports.loadBooks = loadBooks;
+  //exports.IsColorMasking = IsColorMasking;
 
   function pickWorkerData() {
     return utils.pick([
@@ -146,20 +147,32 @@
       }, 0);
     }, 0);
   }
+  
+
   function markDashes() {
     console.log(selectedMatchData);
+    
+   // if (IsColorMasking = true){
+      
+    
     var rawContent = '<div class="booktitle">book1 (ms' + selectedMatchData['book1_chunk'] + ')</div>'
       + window.processColoring(selectedMatchData['book1_raw_content'], selectedMatchData['book2_raw_content'], 'difference-deletion')
-      + '<br/><br/>'
-      + selectedMatchData['book1_raw_content'];
+     // + '<br/><br/>'
+      //+ selectedMatchData['book1_raw_content'];
     d3.select('#book1RawContent').html(rawContent);
 
     var rawContent = '<div class="booktitle">book2 (ms' + selectedMatchData['book2_chunk'] + ')</div>'
       + window.processColoring(selectedMatchData['book2_raw_content'], selectedMatchData['book1_raw_content'], 'difference-addition')
-      + '<br/><br/>'
-      + selectedMatchData['book2_raw_content'];
+     // + '<br/><br/>'
+      //+ selectedMatchData['book2_raw_content'];
     d3.select('#book2RawContent').html(rawContent);
-  }
+//  }
+  //else
+  //{
+    selectedMatchData['book1_raw_content'];
+    selectedMatchData['book2_raw_content'];
+  //}
+}
 
 
 })(window.dataLoader = {});

@@ -62,7 +62,7 @@ body {
   border: 1px solid #d0d0d0;
   overflow: hidden;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 10px ;
+  madrgin-bottom: 10px ;
 }
 
 .upload-book
@@ -130,17 +130,17 @@ div.tooltip {
 .books-details{
   float:left;
   border: 0px red solid;
-  width: 48.5%;
+  
   
   
 }
 
 .books-details-container{
 
-  width: 100%;
+  
   display: block;
   margin-bottom: 20px;
-  float: left;
+  
   padding-bottom: 10px;
   padding-top: 10px;
   border-bottom: #e0e0e0 1px dashed;
@@ -159,7 +159,7 @@ div.tooltip {
   bdackground-image: url(../Images/icons/education31.png);
   background-position: 10px 6px;
   background-repeat: no-repeat;
-  padding-left: 40px;
+  pdadding-left: 40px;
 
 
 }
@@ -169,10 +169,10 @@ div.tooltip {
   background-color:#fcfcfc;
   overflow: hidden;
   transition: 0.5s;
-  margin-bottom: 20px;
+  madrgin-bottom: 20px;
   bdorder: 1px dashed #dbdbdb;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  mardgin-top: 20px;
+  bdox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 20px;
 }
 
@@ -194,7 +194,7 @@ div.tooltip {
   width: calc(50% - 14px);
   height: calc(100% - 125px);
   /*color: #afafaf;*/
-  font-size: 17px;
+  font-size: 15px;
   display: inline-block;
   overflow-y: auto;
   vertical-align: top;
@@ -206,11 +206,21 @@ div.tooltip {
 
 .book-text{
   direction: rtl;
+
 }
+
+.padding10{
+  padding: 10px;
+}
+
+.bookalignments{
+  font-size: 16px;
+}
+
 
 .book-reader .closebtn {
   color: #818181;
-  font-size: 36px;
+  font-size: 15px;
   padding: 2px 5px;
   text-decoration: none;
   display: block;

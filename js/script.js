@@ -1,7 +1,10 @@
+
 'use strict';
 (function () {
 
+
   window.renderVisual = renderVisual;
+  
   function renderVisual(srtFileName, bookUris) {
     var workerConfig = utils.pick([
       'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping'
@@ -48,6 +51,7 @@
     function onInitData(e) {
       var srtData = e.data[0];
       var selectedMetadata = e.data[1];
+      
       graph.setMaxValue(selectedMetadata.map(function (d) {
         return d.book_chunk_count;
       }));
@@ -63,28 +67,32 @@
       bookDetails = d3.select(bookDiv).append('g');
       bookDetails.selectAll('.books-details-container')
         .data(selectedMetadata)
+        
         .enter().append('div').attr('class', 'books-details')
-        .append('a').attr('class', 'a-width label')
+        .append('a').attr('class', 'a-width labedl')
         .attr('href', function (d) { return d.github_url; })
         .text(function (d) { return 'Github Book URL: ' +  utils.replaceParams(config.book_github_url, { 'book_id': d.book_id }); });
 
       bookDetails.selectAll('div')
-        .append('spa').attr('class','label')
+        .append('span').attr('class','labedl')
         .text(function (d) { return 'Book Author: ' + d.book_author; });
         
         bookDetails.selectAll('div')
-        .append('span').attr('class','label')
+        .append('span').attr('class','labedl')
         .text(function (d) { return 'Book Title: ' + d.book_title; });
 
       bookDetails.selectAll('div')
-      .append('span').attr('class','label')
+      .append('span').attr('class','labedl')
         .text(function (d) { return 'Word Count: ' + d.book_word_count; });
 
       bookDetails.selectAll('div')
-      .append('span').attr('class','label')
+      .append('span').attr('class','labedl')
         .text(function (d) { return 'Book URI: ' + d.book_uri; });
 
       eventBindings();
+      //testing individual element of data
+      var b1 = selectedMetadata[0]["book_author"]
+      console.log("B1 " + b1)
     };
 
     function eventBindings() {
@@ -115,6 +123,11 @@
 
       dataLoader.loadBooks(itemData);
     }
+
+    // function colorMasking(){
+    //   IsColorMasking = !IsColorMasking;
+    //   console.log(IsColorMasking);
+    // }
 
     function closePanel() {
       if (graph.animating) return;

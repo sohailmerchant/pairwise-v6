@@ -31,7 +31,7 @@
             top: 40,
             right: 0,
             bottom: 40,
-            left: 60
+            left: 40
         },
         barMaxHeight = 150;
 
@@ -130,7 +130,7 @@
         width = innerWidth - padding.left - padding.right;
         height = innerHeight - 20;
 
-        svgD3.attr("width", outerWidth)
+        svgD3.attr("width", outerWidth-30)
             .attr("height", outerHeight);
 
         drawingG.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
