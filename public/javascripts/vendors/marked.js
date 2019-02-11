@@ -875,7 +875,7 @@
 			} catch (e) {
 				return '';
 			}
-			if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
+			if (prot.indexOf('javascripts:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
 				return '';
 			}
 		}

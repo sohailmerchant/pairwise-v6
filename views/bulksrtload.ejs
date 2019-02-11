@@ -4,27 +4,47 @@
 <head>
   <meta charset="utf-8">
   <title>KITAB - D3 Visualisation</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="../css/loader.css">
-  <script type="text/javascript" src="../vendors/FileSaver.js"></script>
-  <script type="text/javascript" src="../vendors/d3.v4.js"></script>
-  <script type="text/javascript" src="../js/process-coloring.js"></script>
-  <script type="text/javascript" src="js/import-export.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/loader.css">
+
+  <script type="text/javascript" src="javascripts/vendors/d3.v4.js"></script>
+  <script type="text/javascript" src="javascripts/vendors/FileSaver.js"></script>
+  <script type="text/javascript" src="javascripts/vendors/d3.v4.js"></script>
+  <script type="text/javascript" src="javascripts/js/process-coloring.js"></script>
+  <script type="text/javascript" src="javascripts/js/import-export.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Amiri" rel="stylesheet">
+
+
 </head>
 
 <body>
   <!-- <button onclick="window.exportCSV()">Export Back to CSV</button> -->
-  <button onclick="fileInput.click()">Import CSV</button>
+  
 
   <!-- <label class="switch">
     <input type="checkbox" checked onclick="window.toggleMarking()">
     <span class="slider round"></span>
   </label> -->
+  <div><a class="nav-btn" href='/'>KITAB Visualisation</a></div>
 
-  <button onclick="window.toggleMarking()">Toggle Marking</button>
-  <input id="fileInput" type="file" accept="text/csv" onchange="window.loadCSV(this)" hidden />
-  <table id="dataTable" class="data-table" style="display: none">
+  <div class="fluid-row">
+    <div class="col-lg-6">
+        <div><p class="instruction">Click 'Import CSV/SRT' and selected the SRT file to color code the aligned passages. Toggle Marking will remove the color coding</p></div>
+        <button onclick="fileInput.click()">Import CSV/SRT</button>
+        <button onclick="window.toggleMarking()">Toggle Marking</button>
+        <input id="fileInput" type="file" accept="text/csv" onchange="window.loadCSV(this)" hidden />
+        <table id="dataTable" class="data-table" style="display: none">
+    </div>
+    
+    <div class="col-lg-6">
+        <div class='row-count'></div>
+        <div class='srt-details'>
+          <p></p>
+        </div>
+    </div>
+  </div>
+ 
+  
     <tbody>
       <tr id="rowTemplate" hidden>
 

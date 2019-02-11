@@ -120,12 +120,16 @@ function parseText(pageStr, bookName) {
   pageStr.split('\n').forEach(function (row) {
     if (row) {
       row = row.split('\t');
-      var chunkNumber = Number(row[0].replace('ms', ''));
+     var chunkNumber = Number(row[0].replace('ms', ''));
+     
+      //var chunkNumber = Number(row[0].split("_")[1]);
+      
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
         data[chunkNumber] = row[1];
       }
     }
   });
+  
   return data;
 }
 function filterBookNoise(text) {

@@ -1,6 +1,7 @@
 body {
   font-size: 11px ;
   font-family: 'Amiri', Arial, Helvetica, sans-serif  ;
+  
 }
 .container{
 
@@ -12,6 +13,19 @@ body {
   background-color: #f1f1f1;
   margin-bottom: 20px;
   height: 30px;
+
+}
+.col-lg-12{
+padding-left: 0!important;
+}
+#book-content-container{
+  padding: 2px;
+  width: 98%;
+}
+
+.instruction{
+  padding: 10px;
+  font-size: 14px;
 
 }
 
@@ -130,6 +144,7 @@ div.tooltip {
 .books-details{
   float:left;
   border: 0px red solid;
+  margin-right: 30px;
   
   
   
@@ -149,12 +164,6 @@ div.tooltip {
 
 /*--Books View Bottom Panel -- [START]--*/
 
-#bottomPanelRaw {
-  margin-top: 10px;
-  border-bottom: 1px #e0e0e0 dashed;
-  direction: rtl;
- 
-}
 .panel {
   bdackground-image: url(../Images/icons/education31.png);
   background-position: 10px 6px;
@@ -165,36 +174,58 @@ div.tooltip {
 }
 
 .book-reader{
-  height: 550px;
-  background-color:#fcfcfc;
+  height: 650px;
+  /* background-color:#fcfcfc; */
   overflow: hidden;
   transition: 0.5s;
-  madrgin-bottom: 20px;
-  bdorder: 1px dashed #dbdbdb;
-  mardgin-top: 20px;
-  bdox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 20px;
+  border: 1px solid #dbdbdb;
+  boffx-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5px;
+  float: left;
+  padding: 10px;
+}
+.quran-verse{
+  color: red;
+  font-weight: bold;
 }
 
+.reader-menu{
+
+background-color:#fcfcfc;
+min-height: 40px;
+
+float: left;
+    width: 100%;
+    margin-top: 10px;
+}
 .label{
 
-  padding-left: 5px;
+  padding: 0px;
   display: block;
-  font-size: 13px;
+  font-size: 11px;
+  color:black;
+  text-align: left;
+  font-weight: normal;
+  word-wrap: break-word;
+  
+}
+
+#book-details-container{
+  padding: 15px;
 }
 .selection-chunk{
 
   direction: rtl;
+  text-align: justify;
 }
 
 .book-content {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   transition: 0.3s;
-  width: calc(50% - 14px);
-  height: calc(100% - 125px);
+  width: calc(50% - 2px);
+  height: calc(100% - 40px);
   /*color: #afafaf;*/
-  font-size: 15px;
   display: inline-block;
   overflow-y: auto;
   vertical-align: top;
@@ -206,6 +237,7 @@ div.tooltip {
 
 .book-text{
   direction: rtl;
+  text-align: justify;
 
 }
 
@@ -213,15 +245,29 @@ div.tooltip {
   padding: 10px;
 }
 
-.bookalignments{
+.arabic-text-16px{
   font-size: 16px;
+  text-align: right;
+}
+
+.col-xs-6 {
+  width: 49%!important;
 }
 
 
+.arabic-text-20px{
+  font-size: 20px;
+  text-align: right;
+}
+
+.arabic-text-18px{
+  font-size: 18px;
+  text-align: right;
+}
+
 .book-reader .closebtn {
   color: #818181;
-  font-size: 15px;
-  padding: 2px 5px;
+  paddiksng: 2px 5px;
   text-decoration: none;
   display: block;
   transition: 0.3s;
@@ -304,13 +350,73 @@ text-align: right
 }
 
 .loader-btn-wrapper {
-  margin: 10px 0 10px;
-  width: calc(50% - 2px);
+  
+ 
+  width: calc(40% - 2px);
   display: inline-block;
+ position: relative;
+}
+.fa.pull-right{
+  margin-top: 0.5em;
+}
+.row-header{
+
+  border-bottom: 1px solid #d8d8dd;
+  padding: 10px;
+  background-color: #f0f0f5;
 }
 
+#file-upload{
+  margin: 20px 0 10px 0;
+  font-size: 16px;
+}
+
+.panel-default>.panel-heading{
+  background-color: #f0f0f5;
+}
+
+ .page-number
+{
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  display: block;
+
+}
+.milestone-id{
+  
+  text-align: center;
+  display: block;
+  font-size: 75%;
+  color: #e0e0e0
+}
+.milestone-id:hover{
+  color: #db4437;
+}
+.milestone-id.selected{
+  color: black;
+  background-color: yellow;
+}
+
+
+
+.panel-icon{
+
+  font-size: 16px;
+}
+
+.test
+{
+  font-size: 20px;
+  color:red
+}
+
+.list-group-item{
+  border:0px solid #ddd!important;
+}
 .loader-btn {
-  width: 30%;
+  width: 20%;
   border-radius: 2px;
   margin: 0 auto;
   padding: 10px 0;
@@ -321,6 +427,50 @@ text-align: right
   text-align: center;
 }
 
+.nav-btn {
+  width: 120px;
+  border-radius: 2px;
+  padding: 10px;
+  display: block;
+  background: #219150;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 10px;
+}
+
 .loader-btn:hover {
   background: green;
+}
+
+.data-table {
+  border: 0.5px solid rgb(245, 245, 245);
+  width: 100%;
+  font-size: 18px;
+  margin: 4px 0;
+  border-spacing: 0;
+  text-align: right;
+}
+
+.data-table tr td:nth-child(1), tr td:nth-child(2){
+  vertical-align: top;
+  font-size: 10px;
+
+}
+
+.data-table td {
+  border: 0.5px solid #f1f1f1;
+  padding: 8px;
+}
+
+.difference-deletion {
+  
+  color: #db4437;
+}
+
+.difference-addition {
+ 
+  color: #5cb85c;
 }

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>KITAB - D3 Visualisation</title>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+	<meta charset="utf-8">
+	<title>KITAB - D3 Visualisation</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/loader.css">
+	<script type="text/javascript" src="javascripts/vendors/d3.v4.js"></script>
+	<script src="javascripts/js/script.js"></script>
+	<script src="javascripts/js/config.js"></script>
+	<script src="javascripts/js/utils.js"></script>
+	<script src="javascripts/js/process-coloring.js"></script>
+	<script src="javascripts/js/data-loader.js"></script>
+	<script src="javascripts/js/graph_helper.js"></script>
+	<script type="text/javascript" src="javascripts/vendors/marked.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	<div><a class="btn btn-primary" role="button" href='/bulkrenderSrt'>Bulk SRT Color Coding</a><br/><br/></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">KITAB Data Visualisation</h4>
+				
+				
+				
+			</div>
+			<div class="fluid-row">
+			
+			<p class='instruction'>This visualisation is developed based on the new passim run hence will only work for the SRT files in the new format (which includes milestones ids).  Some of the new SRT (Sira) files are available <a href='https://drive.google.com/drive/folders/1H2PFisasD_8BRVGTW_OwyRE2RdIGPbX0?usp=sharing' target='_blank'>here</a>. New SRT files for the full corpus will be available soon. The default SRT file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' to upload an SRT file.</p>
+				<p class='instruction'>February 2019</p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-1" data-toggle="detail-1">
+						<div class="col-lg-10 panel-title">
+							Upload SRT File
+
+
+
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-1">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div id="file-upload">
+									<!--<p clas="half-width">Upload a file:</p>-->
+									<!--<form action="/upload" enctype="multipart/form-data" method="post">-->
+									<form action="/" enctype="multipart/form-data" method="post">
+										<!--<input type="file" name="file-to-upload" class="inline">-->
+										<!--<input type="submit" value="upload" class="inline">-->
+										<label class="up_styles">
+											<input type="file" accept=".srt" name="upload" />
+										</label>
+										<!--<br>-->
+										<!-- Button to upload the choosed files -->
+										<input class="sub" type="submit" value="Upload">
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-2" data-toggle="detail-2">
+						<div class="col-lg-10 panel-title">
+							Books Biblographical Data
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-2">
+
+						<div class="container" >
+							<div class="fluid-row" id="book-details-container">
+							
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-3" data-toggle="detail-3">
+						<div><i class="far fa-chart-bar"></i></div>
+						<div class="col-lg-10 panel-title">
+							Visualisation
+						</div>
+						<div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-3">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div id="madin" class="col-lg-12">
+									<div id="chartBox"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+
+
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-4" data-toggle="detail-4">
+						<div class="col-lg-10 panel-title">
+							Books Alignments
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-4">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div id="bottomPanelRaw" style="display: none;">
+									<div class="col-xs-6 arabic-text-18px">
+
+
+										<div id="b1MilestoneID"></div>
+										<div id="book1RawContent">
+
+										</div>
+
+									</div>
+
+
+									<div class="col-xs-6 arabic-text-18px">
+
+										<div id="b2MilestoneID"></div>
+										<div id="book2RawContent"></div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-5" data-toggle="detail-5">
+						<div class="col-lg-10 panel-title">
+							Books
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-5">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div class="col-lg-12">
+
+									<div id="book-content-container" style="opacity: 0; display: none">
+
+										<a id="closeBtn" href="javascript:void(0)" class="closebtn">&times;</a>
+
+										<div class="fluid-row reader-menu">
+
+											<div class="col-lg-6">
+												<label id="book1StartBtn" class="loader-btn book1">LOAD MORE</label>
+											</div>
+											<div class="col-lg-6 loafder-btn-wrapper">
+												<label id="book2StartBtn" class="loader-btn book2">LOAD MORE</label>
+											</div>
+
+
+										</div>
+
+										<div class="fluid-row book-reader">
+											<div id="book1Content" class="book-content arabic-text-18px"></div>
+											<!--Book1 Loader [START]-->
+											<div id="book1Loader" class="book-content arabic-text-16px">
+												<div id="fountainG" style="top: 40%">
+													<div id="fountainG_1" class="fountainG"></div>
+													<div id="fountainG_2" class="fountainG"></div>
+													<div id="fountainG_3" class="fountainG"></div>
+													<div id="fountainG_4" class="fountainG"></div>
+													<div id="fountainG_5" class="fountainG"></div>
+													<div id="fountainG_6" class="fountainG"></div>
+													<div id="fountainG_7" class="fountainG"></div>
+													<div id="fountainG_8" class="fountainG"></div>
+												</div>
+											</div>
+											<!--Book1 Loader [END]-->
+
+											<div id="book2Content" class="book-content arabic-text-18px"></div>
+											<!--Book2 Loader [START]-->
+											<div id="book2Loader" class="book-content arabic-text-16px">
+												<div id="fountainG" style="top: 40%">
+													<div id="fountainG_1" class="fountainG"></div>
+													<div id="fountainG_2" class="fountainG"></div>
+													<div id="fountainG_3" class="fountainG"></div>
+													<div id="fountainG_4" class="fountainG"></div>
+													<div id="fountainG_5" class="fountainG"></div>
+													<div id="fountainG_6" class="fountainG"></div>
+													<div id="fountainG_7" class="fountainG"></div>
+													<div id="fountainG_8" class="fountainG"></div>
+												</div>
+											</div>
+											<!--Book2 Loader [END]-->
+
+
+
+
+										</div>
+
+										<div class="fluid-row reader-menu">
+											<div class="col-lg-6">
+												<label id="book1EndBtn" class="loader-btn book1">LOAD MORE</label>
+											</div>
+											<div class="col-lg-6">
+												<label id="book2EndBtn" class="loader-btn book2">LOAD MORE</label>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+
+
+		<!--	<div class="container">
+
+		<div class="header">
+			<a href="#default" class="logo">KITAB</a>
+			<div class="header-right">
+				 <a class="active" href="#home">Home</a> 
+				<a href="#contact">Upload SRT File</a>
+				<a href="bulk-read\index.html">Bulk Compare Text Alignments</a>
+			<button onclick="window.colorMasking()">Color On/Off</button> 
+
+			</div>
+		</div>
+
+	 <div class="header">
+		<span class="logo">
+			<img src="data-file/logo-small-2.png" height="60px"/> 
+
+			
+
+		</span>
+		<span class="header-title">KITAB Text Reuse - Data Visualisation App</span>
+
+	</div> -->
+		<!-- <div class="upload-book">
+		<span>
+		Upload book button
+	</span> -->
+
+		<!--Books View Bottom Panel [START]-->
+
+
+
+		<!--Books View Bottom Panel [END]-->
+
+		<script type="text/javascript" src="javascripts/js/script.js"></script>
+		<script>
+
+
+			var book_names = '<%= names %>'.split("_");
+			var filename = '<%= names %>';
+
+
+			renderVisual(filename, {
+				//renderVisual('Shamela0035100_JK006838.srt', {
+				book1: book_names[0],
+				book2: book_names[1].replace('.srt', "")
+
+			});
+
+			$(document).ready(function () {
+				$('[id^=detail-]').show();
+				$('.toggle').click(function () {
+					$input = $(this);
+					$target = $('#' + $input.attr('data-toggle'));
+					$target.slideToggle();
+				});
+
+				highlightText();
+
+			});
+
+
+
+			function highlightText() {
+				$('#book2RawContent').on(
+					'mouseup',
+					function () {
+						var fullString = $(this).text();
+						var targetString = $('#book1RawContent').text();
+						window.get
+						var objSelText = getSelectionText();
+						var position = targetString.indexOf(objSelText.text);
+						console.log(position);
+						if (position > -1) {
+
+							var newString = targetString.substring(0, position);
+							if (objSelText.text.length < position) {
+								newString = newString
+									+ '<span style="background-color:yellow;">'
+									+ targetString.substring(position,
+										objSelText.text.length + position)
+									+ '</span>';
+							} else {
+								newString = newString
+									+ '<span style="background-color:yellow;">'
+									+ targetString.substring(position,
+										objSelText.text.length) + '</span>';
+							}
+							newString = newString
+								+ targetString.substring((position)
+									+ objSelText.text.length);
+							$('#book1RawContent').html(newString);
+						}
+
+					});
+			}
+
+			function getSelectionText() {
+
+				var objSelText = new Array();
+				if (window.getSelection) {
+					objSelText.text = window.getSelection().toString();
+
+					objSelText.StartIndex = window.getSelection().anchorOffset;
+					objSelText.EndIndex = window.getSelection().focusOffset;
+				} else if (document.selection && document.selection.type != "Control") {
+					objSelText.text = document.selection.createRange().text;
+					objSelText.StartIndex = document.selection.createRange().anchorOffset;
+					objSelText.EndIndex = document.selection.createRange().focusOffset;
+				}
+				return objSelText;
+			}
+		</script>
+</body>
+
+</html>

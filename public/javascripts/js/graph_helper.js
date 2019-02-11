@@ -57,6 +57,7 @@
 
     function initData(data) {
         chartData = data;
+        console.log("From initData Function");
         console.log(chartData[0]);
     }
 

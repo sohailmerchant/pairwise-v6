@@ -8,6 +8,7 @@
   window.toggleMarking = toggleMarking;
   window.isMarkingsOn = true;
   window.currentText = undefined;
+  
 
   function loadCSV(input) {
     var reader = new FileReader();
@@ -36,14 +37,20 @@
     var dataTable = document.getElementById('dataTable');
     var tableBody = dataTable.querySelector('tbody');
     var inputRows = d3.tsvParseRows(window.currentText);
+    console.log(inputRows);
+    console.log(inputRows[2][8].length);
     var col = {
-      name1: 9,
-      name2: 11,
-      content1: 2,
-      content2: 3
+      name1: 0,
+      name2: 10,
+      content1: 8,
+      content2: 18
+      
     };
     d3.selectAll('#dataTable tr:not(#rowTemplate)').remove();
-
+    d3.select('.row-count').selectAll('p').remove();
+    d3.select('.row-count').append('p')
+    .text("Number of records (aligned pairs): " + inputRows.length);
+  
     processRow(inputRows.shift(), false);    // ##1 line deals first row as header
 
     inputRows.forEach(function (dataRow) {
@@ -51,12 +58,15 @@
     });
 
     d3.select('#dataTable').style('display', null);
+
     function processRow(dataRow, isMarkingOn) {
       var nodeClone = document.getElementById('rowTemplate').cloneNode(true);
       nodeClone.removeAttribute('id');
       var params = {
         book1Name: dataRow[col.name1],
         book2Name: dataRow[col.name2]
+ 
+
       };
       if (isMarkingOn) {
         params.book1Content = window.processColoring(dataRow[col.content1], dataRow[col.content2], 'difference-deletion');
@@ -64,9 +74,11 @@
       } else {
         params.book1Content = dataRow[col.content1];
         params.book2Content = dataRow[col.content2];
+        
       }
       nodeClone.querySelectorAll('td').forEach(function (td) {
         td.innerHTML = replaceParams(td.innerHTML, params);
+        
       });
       nodeClone.removeAttribute('hidden');
       tableBody.append(nodeClone);
@@ -77,6 +89,7 @@
       return;
     }
     var csvOutputArray = [];
+    
     d3.selectAll('#dataTable tr:not(#rowTemplate)')
       .each(function () {
         var outputRow = [];
