@@ -468,9 +468,11 @@ text-align: right
 .difference-deletion {
   
   color: #db4437;
+  color: #FB2B11;
 }
 
 .difference-addition {
  
   color: #5cb85c;
+  color: #39FF14
 }

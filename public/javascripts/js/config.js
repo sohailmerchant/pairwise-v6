@@ -16,7 +16,7 @@
   exports.backward_chunk_count = 1;
   exports.load_more_count = 2;
   exports.page_chunk_count = 200;
-
+  exports.appversion = 2;
 
   exports.meta_data_mapping = [
     { key: 'book_id', cell: 0, type: 'string' },
@@ -32,6 +32,47 @@
   exports.meta_data_book_id_cell = exports.meta_data_mapping[0].cell;
 
   exports.srt_data_mapping = [
+
+    // { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
+    // { key: 'book1_y1', cell: 2, type: 'number' },
+    // { key: 'book1_y2', cell: 3, type: 'number' },
+    // { key: 'book1_raw_content', cell: 8, type: 'string' },
+    // { key: 'book1_content', cell: 8, type: 'normalizedText' },
+
+    // { key: 'book2_id', key2: 'book2_chunk', cell: 10, type: 'extract' },
+    // { key: 'book2_y1', cell: 12, type: 'number' },
+    // { key: 'book2_y2', cell: 13, type: 'number' },
+    // { key: 'book2_raw_content', cell: 18, type: 'string' },
+    // { key: 'book2_content', cell: 18, type: 'normalizedText' }
+
+    // { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
+    // { key: 'book1_y1', cell: 2, type: 'number' },
+    // { key: 'book1_y2', cell: 3, type: 'number' },
+    // { key: 'book1_raw_content', cell: 1, type: 'string' },
+    // { key: 'book1_content', cell: 1, type: 'normalizedText' },
+
+    // { key: 'book2_id', key2: 'book2_chunk', cell: 6, type: 'extract' },
+    // { key: 'book2_y1', cell: 8, type: 'number' },
+    // { key: 'book2_y2', cell: 9, type: 'number' },
+    // { key: 'book2_raw_content', cell: 7, type: 'string' },
+    // { key: 'book2_content', cell: 7, type: 'normalizedText' }
+
+    { key: 'book1_id', key2: 'book1_chunk', cell: 8, type: 'extract' },
+    { key: 'book1_y1', cell: 10, type: 'number' },
+    { key: 'book1_y2', cell: 11, type: 'number' },
+    { key: 'book1_raw_content', cell: 14, type: 'string' },
+    { key: 'book1_content', cell: 14, type: 'normalizedText' },
+    
+    { key: 'book2_id', key2: 'book2_chunk', cell: 9, type: 'extract' },
+    { key: 'book2_y1', cell: 12, type: 'number' },
+    { key: 'book2_y2', cell: 13, type: 'number' },
+    { key: 'book2_raw_content', cell: 15, type: 'string' },
+    { key: 'book2_content', cell: 15, type: 'normalizedText' }
+  ];
+
+
+  exports.srt_data_mappingV2 = [
+
     { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
     { key: 'book1_y1', cell: 2, type: 'number' },
     { key: 'book1_y2', cell: 3, type: 'number' },
@@ -47,27 +88,18 @@
     // { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
     // { key: 'book1_y1', cell: 2, type: 'number' },
     // { key: 'book1_y2', cell: 3, type: 'number' },
-    // { key: 'book1_raw_content', cell: 1, type: 'string' },
-    // { key: 'book1_content', cell: 1, type: 'normalizedText' },
+    // { key: 'book1_raw_content', cell: 8, type: 'string' },
+    // { key: 'book1_content', cell: 8, type: 'normalizedText' },
 
-    // { key: 'book2_id', key2: 'book2_chunk', cell: 6, type: 'extract' },
-    // { key: 'book2_y1', cell: 8, type: 'number' },
-    // { key: 'book2_y2', cell: 9, type: 'number' },
-    // { key: 'book2_raw_content', cell: 7, type: 'string' },
-    // { key: 'book2_content', cell: 7, type: 'normalizedText' }
-
-    // { key: 'book1_id', key2: 'book1_chunk', cell: 8, type: 'extract' },
-    // { key: 'book1_y1', cell: 10, type: 'number' },
-    // { key: 'book1_y2', cell: 11, type: 'number' },
-    // { key: 'book1_raw_content', cell: 14, type: 'string' },
-    // { key: 'book1_content', cell: 14, type: 'normalizedText' },
-    
     // { key: 'book2_id', key2: 'book2_chunk', cell: 9, type: 'extract' },
     // { key: 'book2_y1', cell: 12, type: 'number' },
     // { key: 'book2_y2', cell: 13, type: 'number' },
     // { key: 'book2_raw_content', cell: 15, type: 'string' },
     // { key: 'book2_content', cell: 15, type: 'normalizedText' }
+   
   ];
+
+
 
 
 })(window.config = {});

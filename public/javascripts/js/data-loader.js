@@ -6,6 +6,7 @@
     'page_string_format', 'book_content_url', 'bookSequence'
   ], {}, config);
   var myWorker = new Worker(config.web_worker_path.load_chunks);
+
   myWorker.onmessage = workerMessage;
 
   var selectedMatchData, loadedChunkRange = {};

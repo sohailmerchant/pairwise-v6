@@ -1,19 +1,24 @@
 
 'use strict';
 (function () {
-
+  
 
   window.renderVisual = renderVisual;
   
-  function renderVisual(srtFileName, bookUris) {
+
+  function renderVisual(srtFileName, bookUris, appversion) {
+    config.appversion =  appversion;
     console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
     var workerConfig = utils.pick([
-      'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping'
+      'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping','appversion','srt_data_mappingV2'
     ], {}, config);
 
 
     var loadInitialDataWorker = new Worker(config.web_worker_path.load_inial_data);
     loadInitialDataWorker.onmessage = onInitData;
+    
+    console.log(config.appversion);
+    
 
     // book1: Top Bar Chart (x0)
     // book2: Bottom Bar Chart (x1)
@@ -21,7 +26,7 @@
     // y-axis: 0 to 100 for book1 and book2
     // x-axis: decided by maxValues function which returns {book1, book2, peek}
     // vertical layout :: 60 + 60
-
+    
     var isPanelOpened;
     var duration1 = 700, duration2 = 400;
 
@@ -106,8 +111,6 @@
       console.log(JSON.stringify(selectedMetadata[0]));
       
   
-      
-      
       eventBindings();
       //testing individual element of data
       var b1 = selectedMetadata[0]["book_author"]

@@ -26,17 +26,23 @@
 
 <body>
 	<div class="container">
-	<div><a class="btn btn-primary" role="button" href='/bulkrenderSrt'>Bulk SRT Color Coding</a><br/><br/></div>
+		<br/>
+		<div><a class="btn btn-primary" role="button" href='/bulkrenderSrt'>Color Code Alignments - SRT V2</a><br /><br /></div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">KITAB Data Visualisation</h4>
-				
-				
-				
+
+
+
 			</div>
 			<div class="fluid-row">
-			
-			<p class='instruction'>This KITAB visualisation V5 is developed based on the new passim run hence will only work for the SRT files in the new format (which includes milestones ids).  Some of the new SRT (Sira) files are available <a href='https://drive.google.com/drive/folders/1H2PFisasD_8BRVGTW_OwyRE2RdIGPbX0?usp=sharing' target='_blank'>here</a>. New SRT files for the full corpus will be available soon. The default SRT file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' to upload an SRT file.</p>
+
+				<p class='instruction'>This KITAB app can generate visualisation for V1 and V2 type of srt files.  The V1 srt files for the whole corpus are available <a href='http://dev.kitab-project.org/passim1017/target='_blank'>here.</a> 
+					The file needs to be exacted before I can  be used to generate visualisation
+					<br/>		
+					<br/> Some of the V2 SRT (Sira) files are available <a href='https://drive.google.com/drive/folders/1H2PFisasD_8BRVGTW_OwyRE2RdIGPbX0?usp=sharing' target='_blank'>here</a>.
+					The V2 SRT files for the full corpus will be available soon. The default SRT (V2) file loaded to this visualisation is
+					is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
 				<p class='instruction'>February 2019</p>
 			</div>
 			<ul class="list-group">
@@ -54,6 +60,15 @@
 
 						<div class="container">
 							<div class="fluid-row">
+								<div>
+									<input type="radio" id="v1" name="version" value="1">
+									<label for="v1">V1 - October 2017</label>
+								</div>
+
+								<div>
+									<input type="radio" id="v2" name="version" value="2">
+									<label for="v2">V2 - January 2019</label>
+								</div>
 								<div id="file-upload">
 									<!--<p clas="half-width">Upload a file:</p>-->
 									<!--<form action="/upload" enctype="multipart/form-data" method="post">-->
@@ -61,11 +76,11 @@
 										<!--<input type="file" name="file-to-upload" class="inline">-->
 										<!--<input type="submit" value="upload" class="inline">-->
 										<label class="up_styles">
-											<input type="file" accept=".srt" name="upload" />
+											<input type="file" accept=".srt" name="upload" ' />
 										</label>
 										<!--<br>-->
 										<!-- Button to upload the choosed files -->
-										<input class="sub" type="submit" value="Upload">
+										<input  type="submit" value="Upload" class='btn btn-primary'>
 									</form>
 
 								</div>
@@ -82,9 +97,9 @@
 					</div>
 					<div id="detail-2">
 
-						<div class="container" >
+						<div class="container">
 							<div class="fluid-row" id="book-details-container">
-							
+
 							</div>
 						</div>
 					</div>
@@ -274,14 +289,14 @@
 
 			var book_names = '<%= names %>'.split("_");
 			var filename = '<%= names %>';
-
+			var selectedappVersion;
 
 			renderVisual(filename, {
 				//renderVisual('Shamela0035100_JK006838.srt', {
 				book1: book_names[0],
 				book2: book_names[1].replace('.srt', "")
 
-			});
+			}, localStorage.getItem('selectedappversion'));
 
 			$(document).ready(function () {
 				$('[id^=detail-]').show();
@@ -290,12 +305,24 @@
 					$target = $('#' + $input.attr('data-toggle'));
 					$target.slideToggle();
 				});
-
+				
 				highlightText();
 
+				if (localStorage.getItem('selectedappversion') == '') {
+					localStorage.setItem('selectedappversion', 2);
+				}
+				
+				if (localStorage.getItem('selectedappversion') == 1)
+					$("#v1").prop("checked", true);
+				else
+					$("#v2").prop("checked", true);
+
+
+				$("input[name='version']").change(function () {
+					selectedappVersion = $("input[name='version']:checked").val();
+					localStorage.setItem('selectedappversion', $("input[name='version']:checked").val());
+				});
 			});
-
-
 
 			function highlightText() {
 				$('#book2RawContent').on(

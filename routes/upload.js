@@ -10,7 +10,7 @@ const formidable = require('formidable');
         form.parse(req);
 
         form.on('fileBegin', function (name, file) {
-          //  file.path = __dirname + '/../public/data-file/book1_book2.srt'; //+ file.name;
+          //file.path = __dirname + '/../public/data-file/book1_book2.srt'; //+ file.name;
             file.path = __dirname + '/../public/data-file/'+ file.name;
         });
 

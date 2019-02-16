@@ -122,13 +122,14 @@ function parseText(pageStr, bookName) {
       row = row.split('\t');
      var chunkNumber = Number(row[0].replace('ms', ''));
      
-      //var chunkNumber = Number(row[0].split("_")[1]);
+      //var chunkNumber = Number(row[0].split('',''));
       
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
         data[chunkNumber] = row[1];
       }
     }
   });
+  console.log("load chunks" + data);
   
   return data;
 }

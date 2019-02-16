@@ -39,6 +39,8 @@
     var inputRows = d3.tsvParseRows(window.currentText);
     console.log(inputRows);
     console.log(inputRows[2][8].length);
+
+    
     var col = {
       name1: 0,
       name2: 10,

@@ -1,20 +1,26 @@
-
+var appversion;
 onmessage = function (e) {
   var srtFileUrl = e.data[0];
   console.log("url " + JSON.stringify(e.data[0]));
   var bookUris = e.data[1];
   console.log("data1 " + JSON.stringify(e.data[1]));
   var config = e.data[2];
+  console.log(e.data);
+  appversion = e.data[2]['appversion']
   console.log("conf " + JSON.stringify(config));
   var output = [];
+
+
   loadXhr(srtFileUrl, onSrtTextLoaded);
   function onSrtTextLoaded(srtDataText) {
     var srtData;
     loadXhr(config.meta_data_path, function (metaDataText) {
       postMessage([srtData, parseMetaDataFile(metaDataText, config, bookUris)]);
+
     });
     //console.log(srtDataText);
     srtData = parseSrtFile(srtDataText, config);
+
   }
 }
 
@@ -22,11 +28,16 @@ function parseSrtFile(fileStr, config) {
   var data = [];
 
   fileStr.split('\n').forEach(function (row) {
-  
+
     if (row) {
 
       row = row.split('\t');
-      data.push(extractRow(row, config.srt_data_mapping));
+      if (config.appversion == 1) {
+        data.push(extractRow(row, config.srt_data_mapping));
+      }
+      else
+        data.push(extractRow(row, config.srt_data_mappingV2));
+
     }
   });
 
@@ -100,8 +111,13 @@ function extractRow(row, mapping) {
 }
 
 function extractIdAndMs(txtString) {
-  var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
-  //var match = txtString.match(/(\w+)_(\d+)/);
+  if (appversion == 1) {
+    var match = txtString.match(/(\w+)_(\d+)/);
+  }
+  else {
+    var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
+  }
+
   if (match) {
     return [match[1], match[2]];   // [book_id, ms_id]
   } else {
@@ -138,7 +154,7 @@ function deNormalizeItemText(text) {
   //text = text.replace(/ /g, '[\\s\\w\\#\\n\\@\\$\\|\\(\\)-]+');
   //text = text.replace(/ /g, '((\\W+(\\d+)?)?(Page\\w+)?)+');       // new from max
   text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
-  
+
   // text = text.replace(/ /g, '(\W+(\d+)?)?(note\w+|<[^<]+>|Page\w+)?');
   // -------------------------------------
 
