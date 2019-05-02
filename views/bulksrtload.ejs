@@ -29,6 +29,15 @@
 
   <div class="fluid-row">
     <div class="col-lg-6">
+        <div>
+									<input type="radio" id="v2" name="version" value="2">
+									<label for="v2">V2 - January 2019</label>
+								</div>
+
+								<div>
+									<input type="radio" id="v3" name="version" value="3">
+									<label for="v3">V3 - Aggregated 2019</label>
+								</div>
         <div><p class="instruction">Click 'Import CSV/SRT' and selected the SRT file to color code the aligned passages. Toggle Marking will remove the color coding</p></div>
         <button onclick="fileInput.click()">Import CSV/SRT</button>
         <button onclick="window.toggleMarking()">Toggle Marking</button>
@@ -62,8 +71,8 @@
 
         <td>{{book1Name}}</td>
         <td>{{book2Name}}</td>
-        <td>{{book1Content}}</td>
-        <td>{{book2Content}}</td>
+        <td ><div id="book2Alignment">{{book1Content}}</div></td>
+        <td><div id="book1Alignment">{{book2Content}}</div></td>
       </tr>
     </tbody>
   </table>
@@ -79,6 +88,27 @@
       <div id="fountainG_8" class="fountainG"></div>
     </div>
   </div>
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <script>
+  var Isaggregated;
+
+  if (localStorage.getItem('Isaggregated') == '') {
+					localStorage.setItem('Isaggregated', 2);
+				}
+				
+				if (localStorage.getItem('Isaggregated') == 2)
+					$("#v2").prop("checked", true);
+				else
+					$("#v3").prop("checked", true);
+
+
+				$("input[name='version']").change(function () {
+					Isaggregated = $("input[name='version']:checked").val();
+					localStorage.setItem('Isaggregated', $("input[name='version']:checked").val());
+				});
+  </script>
 </body>
 
 </html>
