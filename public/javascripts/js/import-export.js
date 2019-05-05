@@ -9,6 +9,7 @@
   window.isMarkingsOn = true;
   window.currentText = undefined;
   const sum = (accumulator, currentValue) => accumulator + currentValue;
+
   var aggregatedTotals = {
     totalWordMatch: [],
     someotherTotal: []
@@ -19,22 +20,22 @@
     var reader = new FileReader();
     reader.onloadend = function () {
       window.currentText = reader.result;
-      d3.select('#bulkLoader').style('display', null);
+      //d3.select('#bulkLoader').style('display', null);
       d3.select('#dataTable').style('display', 'none');
       setTimeout(function () {
         loadCurrentTextOnToDom();
-        d3.select('#bulkLoader').style('display', 'none');
+        //d3.select('#bulkLoader').style('display', 'none');
       });
     }
     reader.readAsText(input.files[0], 'utf-8')
   }
   function toggleMarking() {
     window.isMarkingsOn = !window.isMarkingsOn;
-    d3.select('#bulkLoader').style('display', null);
+    
     d3.select('#dataTable').style('display', 'none');
     setTimeout(function () {
       loadCurrentTextOnToDom();
-      d3.select('#bulkLoader').style('display', 'none');
+    
     });
   }
   function loadCurrentTextOnToDom() {
@@ -70,10 +71,6 @@
     }
 
     d3.selectAll('#dataTable tr:not(#rowTemplate)').remove();
-    d3.select('.row-count').selectAll('p').remove();
-    d3.select('.row-count').append('p')
-    .text("Number of records (aligned pairs): " + inputRows.length);
-    
 
     processRow(inputRows.shift(), false);    // ##1 line deals first row as header
 
@@ -110,7 +107,16 @@
       tableBody.append(nodeClone);
     }
     //might be useful. showing aggregated totals...
-   // console.log(aggregatedTotals.totalWordMatch.reduce(sum))
+    console.log(aggregatedTotals.totalWordMatch.reduce(sum))
+
+   
+    d3.select('.srt-details').selectAll('p').remove();
+    d3.select('.srt-details').append('p')
+    .text("Number of records (aligned pairs) - " + inputRows.length);
+    
+    // d3.selectAll('.srt-details').append('p')
+    // .text("Total Word Matched Book 1 to Book 2 - " + aggregatedTotals.totalWordMatch.reduce(sum));
+    
   }
   
   function exportCSV() {
