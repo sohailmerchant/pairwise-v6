@@ -33,61 +33,73 @@
     <span class="slider round"></span>
   </label> -->
 
-  <div class="fluid-row" style="margin-top: 5px"><div class="col-lg-10"><h4 class="panel-title">Passim Alignment Reader</h4></div></div>
-  <br/><br/>
-  <div class="fluid-row" class="nav"  style="border:1px solid rgb(245, 245, 245); display:block; height:60px; padding: 5px; margin-top: 5px">
-    <div class="col-lg-5">
-      <a class="btn btn-primary"  href='/'>KITAB Visualisation</a>
-      
+  <div class="fluid-row" style="margin-top: 5px">
+    <div class="col-lg-10">
+      <h4 class="panel-title">Passim Alignment Reader</h4>
     </div>
-    
-   <div class="col-lg-5">
-     
-     <p class="instruction">Passim V2 (Feb 2019) alignments are available <a href="http://dev.kitab-project.org/passim01022019/" target="_blank">here;</a>
-   Passim Aggregated alignments are available <a href="http://dev.kitab-project.org/aggregated01052019" target="_blank">here</a>
-   <br/><i>Please ensure that you unzip the gz file before uploading it here.</i></p>
-   
-
   </div>
+  <br /><br />
+  <div class="fluid-row" class="nav"
+    style="border:1px solid rgb(245, 245, 245); display:block; height:80px; padding: 5px; margin-top: 5px">
+    <div class="col-lg-5">
+      <a class="btn btn-primary" href='/'>KITAB Visualisation</a>
+
+    </div>
+
+    <div class="col-lg-5">
+
+      <p class="instruction">Passim V1 (October 2017) alignments are available <a
+        href="http://dev.kitab-project.org/passim1017/" target="_blank">here;</a> Passim V2 (Feb 2019) alignments are available <a
+          href="http://dev.kitab-project.org/passim01022019/" target="_blank">here;</a>
+        Passim Aggregated alignments are available <a href="http://dev.kitab-project.org/aggregated01052019"
+          target="_blank">here</a>
+        <br /><i>Please ensure that you unzip the gz file before uploading it here.</i></p>
+
+
+    </div>
   </div>
 
-   <div class="fluid-row" class="nav" style=" background-color: rgb(245, 245, 245); border:1px solid rgb(245, 245, 245); display:block; height:135px; margin-top:5px;padding: 5px;">
+  <div class="fluid-row" class="nav"
+    style=" background-color: rgb(245, 245, 245); border:1px solid rgb(245, 245, 245); display:block; height:135px; margin-top:5px;padding: 5px;">
     <div class="col-lg-5">
       <div style="margin-top:15px;">
 
         <div>
           <span class="instruction">1 - Select the version of passim output</span>
-          <br/>
+          <br />
           <div style="padding-left:8px; margin-top:10px">
-          <input type="radio" id="v2" name="version" value="2">
-          <span for="v2"> V2 - Feburary 2019</span>
-          <br/>
-          <input type="radio" id="v3" name="version" value="3">
-          <span for="v3">V3 - Aggregated 2019</span>
-        </div>
+            <input type="radio" id="v1" name="version" value="1">
+            <span for="v1">V1 - October 2017 - <a href='http://dev.kitab-project.org/passim1017/' target="_blank">SRT/CSV Here</a> </span>
+            <br />
+            <input type="radio" id="v2" name="version" value="2">
+            <span for="v2"> V2 - Feburary 2019 - <a href='http://dev.kitab-project.org/passim01022019/' target="_blank">SRT/CSV Here</a> </span>
+            <br />
+            <input type="radio" id="v3" name="version" value="3">
+            <span for="v3">V3 - Aggregated 2019 - <a href='http://dev.kitab-project.org/aggregated01052019/' target="_blank">SRT/CSV Here</a></span>
+          </div>
 
-        <div>
-          
+          <div>
+
+          </div>
         </div>
-      </div>
 
       </div>
     </div>
 
     <div class="col-lg-5">
 
-      
+
       <p class="instruction">2 - Click 'Import CSV/SRT' and selected the SRT file to color code the aligned passages.
         Toggle Marking will remove the color coding</p>
 
       <div class="instruction">
-      <button class="btn btn-primary" onclick="fileInput.click()">Import CSV/SRT</button>
-      <button  class="btn btn-primary" onclick="window.toggleMarking()">Color Coding On/Off</button>
-      <input id="fileInput" type="file" accept="text/csv" onchange="window.loadCSV(this)" style="display: none"
-        type="hidden" />
+        <button class="btn btn-primary" onclick="fileInput.click()">Import CSV/SRT</button>
+        <button class="btn btn-primary" onclick="window.toggleMarking()">Color Coding On/Off</button>
+        <input id="fileInput" type="file" accept="text/csv" onchange="window.loadCSV(this)" style="display: none"
+          type="hidden" />
       </div>
-        
-      
+
+
     </div>
 
   </div>
@@ -104,16 +116,37 @@
 
         <div class="col-lg-6">
           <div class='srt-details instruction'></div>
-         
-            <p></p>
-          
+
+          <p></p>
+
         </div>
 
         <div class="col-lg-6"></div>
     </div>
 
 
-    <tbody>
+    <tbody id="test">
+
+      <!-- <tr id="rowTemplate" hidden>
+
+        <td>{{book1Name}}</td>
+      
+      </tr>
+      <tr>
+        <td>{{book2Name}}</td>
+      </tr>
+      <tr>
+        <td>
+          <div id="book2Alignment">{{book1Content}}</div>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          <div id="book1Alignment">{{book2Content}}</div>
+        </td>
+      </tr> -->
+
       <tr id="rowTemplate" hidden>
 
         <!-- ##2 START -->
@@ -153,24 +186,27 @@
     </div>
   </div> -->
 
- 
+
 
   <script>
     var Isaggregated;
 
-    if (localStorage.getItem('Isaggregated') == '') {
-      localStorage.setItem('Isaggregated', 2);
+    if (localStorage.getItem('version') == '') {
+      localStorage.setItem('version', 3);
     }
 
-    if (localStorage.getItem('Isaggregated') == 2)
+    if (localStorage.getItem('version') == 2)
       $("#v2").prop("checked", true);
+    if (localStorage.getItem('v1') == 1)
+      $("#v1").prop("checked", true);
     else
       $("#v3").prop("checked", true);
 
 
     $("input[name='version']").change(function () {
       Isaggregated = $("input[name='version']:checked").val();
-      localStorage.setItem('Isaggregated', $("input[name='version']:checked").val());
+      localStorage.setItem('version', $("input[name='version']:checked").val());
+     // localStorage.setItem('Isaggregated', $("input[name='version']:checked").val());
     });
   </script>
 </body>

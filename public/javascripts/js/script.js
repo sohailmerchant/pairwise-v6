@@ -8,7 +8,7 @@
 
   function renderVisual(srtFileName, bookUris, appversion) {
     config.appversion =  appversion;
-    console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
+    //console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
     var workerConfig = utils.pick([
       'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping','appversion','srt_data_mappingV2'
     ], {}, config);
@@ -56,6 +56,7 @@
     // graph.setLayout();
 
     function onInitData(e) {
+      console.log("onInit"+ e.data[0])
       
       var srtData = e.data[0];
       var selectedMetadata = e.data[1];
@@ -65,7 +66,7 @@
       }));
 
       graph.initData(srtData);
-      // console.log(srtData)
+      console.log("srt" + srtData)
       graph.setLayout();
 
       setTimeout(function () {
@@ -88,7 +89,8 @@
 
       bookDetails.selectAll('div')
         .append('p').attr('class','label')
-        .text(function (d) { return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
+        
+        .text(function (d) { console.log("DD" + d.book_author); return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
         
         bookDetails.selectAll('div')
         .append('p').attr('class','label')
@@ -108,13 +110,13 @@
       // .append('p').attr('class','label')
       // .text(selectedMetadata[1]["book_title"]);
       
-      console.log(JSON.stringify(selectedMetadata[0]));
+    
       
   
       eventBindings();
       //testing individual element of data
       var b1 = selectedMetadata[0]["book_author"]
-      console.log("B1 " + b1)
+      //console.log("B1 " + b1)
     };
 
     function eventBindings() {

@@ -15,13 +15,18 @@ const formidable = require('formidable');
         });
 
         form.on('file', function (name, file) {
-            if (file.name == "" || file.name.split('.').pop() != 'srt')
-                res.render('index', {names: "Shamela0026039_JK000467.srt"})
+            if (file.name == "")
+                res.render('index', {names: ""})
             else
                 res.render('index', {names: file.name});
         });
        
      //res.redirect('/');
+    });
+
+    router.get('/:filename', function (req, res, next) {
+        console.log("req "+req.params('filename'));
+        res.render('/dd');
     });
 // }
 module.exports = router;

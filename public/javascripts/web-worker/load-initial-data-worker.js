@@ -1,13 +1,15 @@
+
+
 var appversion;
 onmessage = function (e) {
   var srtFileUrl = e.data[0];
-  console.log("url " + JSON.stringify(e.data[0]));
+  //console.log("url " + JSON.stringify(e.data[0]));
   var bookUris = e.data[1];
-  console.log("data1 " + JSON.stringify(e.data[1]));
+  //console.log("data1 " + JSON.stringify(e.data[1]));
   var config = e.data[2];
-  console.log(e.data);
+  //console.log(e.data);
   appversion = e.data[2]['appversion']
-  console.log("conf " + JSON.stringify(config));
+  //console.log("conf " + JSON.stringify(config));
   var output = [];
 
 
@@ -24,8 +26,11 @@ onmessage = function (e) {
   }
 }
 
+
 function parseSrtFile(fileStr, config) {
+  
   var data = [];
+
 
   fileStr.split('\n').forEach(function (row) {
 
@@ -103,10 +108,17 @@ var typesForConversion = {
 
 function extractRow(row, mapping) {
 
+  console.log("r1: " + row)
+  console.log("m1: " + mapping)
+  
   return mapping.reduce(function (output, schema) {
+    //console.log(typesForConversion[schema.type])
     var process = typesForConversion[schema.type];
+    //console.log("MAPPING:" + schema.cell);
     process(output, row[schema.cell], schema);
+    console.log(row)
     return output;
+    
   }, {});
 }
 
@@ -115,7 +127,11 @@ function extractIdAndMs(txtString) {
     var match = txtString.match(/(\w+)_(\d+)/);
   }
   else {
-    var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
+    // This regex ignore .completed/inProgress/mARkdown ignore
+    //var match = txtString.match(/(\w+)-\w+?\.(\d+)/);
+    var match = txtString.match(/(\w+)-ara1(?:\.\w+?)?\.ms(\d+)/);
+    console.log(match)
+    //var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
   }
 
   if (match) {

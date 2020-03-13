@@ -40,9 +40,8 @@
 				<p class='instruction'>This KITAB app can generate visualisation for V1 and V2 type of srt files.  The V1 srt files for the whole corpus are available <a href='http://dev.kitab-project.org/passim1017/' target='_blank'>here.</a> 
 					The file needs to be exacted before I can  be used to generate visualisation
 					<br/>		
-					<br/> Some of the V2 SRT (Sira) files are available <a href='https://drive.google.com/drive/folders/1H2PFisasD_8BRVGTW_OwyRE2RdIGPbX0?usp=sharing' target='_blank'>here</a>.
-					The V2 SRT files for the full corpus will be available soon. The default SRT (V2) file loaded to this visualisation is
-					is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
+					<br/> V2 SRT (Sira) files are available <a href='http://dev.kitab-project.org/passim01022019' target='_blank'>here</a>.
+					 The default SRT (V2) file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
 				<p class='instruction'>May 2019</p>
 			</div>
 			<ul class="list-group">
@@ -62,12 +61,12 @@
 							<div class="fluid-row">
 								<div>
 									<input type="radio" id="v1" name="version" value="1">
-									<label for="v1">V1 - October 2017</label>
+									<label for="v1">V1 - October 2017 - <a href='http://dev.kitab-project.org/passim1017/' target="_blank">SRT/CSV Here</a></label>
 								</div>
 
 								<div>
 									<input type="radio" id="v2" name="version" value="2">
-									<label for="v2">V2 - January 2019</label>
+									<label for="v2">V2 - January 2019 - <a href='http://dev.kitab-project.org/passim01022019/' target="_blank">SRT/CSV Here</a></label>
 								</div>
 								<div id="file-upload">
 									<!--<p clas="half-width">Upload a file:</p>-->
@@ -76,7 +75,7 @@
 										<!--<input type="file" name="file-to-upload" class="inline">-->
 										<!--<input type="submit" value="upload" class="inline">-->
 										<label class="up_styles">
-											<input type="file" accept=".srt" name="upload" ' />
+											<input type="file" accept=".srt, .csv, .gz" name="upload" />
 										</label>
 										<!--<br>-->
 										<!-- Button to upload the choosed files -->
@@ -254,15 +253,33 @@
 
 
 			var book_names = '<%= names %>'.split("_");
+
+			var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/,"");
+			bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,"");
+			console.log("bn1 " + bn1)
+			bn2= book_names[1].replace(/(\-ara1)|(\.ara1)/,"");
+			bn2= bn2.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,"");
+			console.log("bn2 " + bn2)
+			bn2 = bn2.replace(/(\.csv)|(\.srt)|(\.completed)/, "");
+			console.log(bn1 + "_" + bn2)
+
+			//book_names = book_names.split("-");
 			var filename = '<%= names %>';
+			
+			console.log("filename: " + filename);
 			var selectedappVersion;
 
 			renderVisual(filename, {
+				
 				//renderVisual('Shamela0035100_JK006838.srt', {
-				book1: book_names[0],
-				book2: book_names[1].replace('.srt', "")
+					book1: bn1,
+					book2: bn2
+				// book1: book_names[0].replace('.ara1', ""),
+				// book2: book_names[1].replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,""),
+				// book2: book_names[1].replace(/(\.csv)|(\.srt)|(\.completed)/, "")
 
 			}, localStorage.getItem('selectedappversion'));
+			console.log("ddd: " + book_names);
 
 			$(document).ready(function () {
 				$('[id^=detail-]').show();

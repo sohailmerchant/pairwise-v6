@@ -120,8 +120,9 @@ function parseText(pageStr, bookName) {
   pageStr.split('\n').forEach(function (row) {
     if (row) {
       row = row.split('\t');
-     var chunkNumber = Number(row[0].replace('ms', ''));
      
+     var chunkNumber = Number(row[0].replace('ms', ''));
+     console.log("CH:" + chunkNumber)
       //var chunkNumber = Number(row[0].split('',''));
       
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
