@@ -44,8 +44,8 @@
 					 The default SRT (V2) file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
 				<p class='instruction'>May 2019</p>
 			</div>
-			<ul class="list-group">
-				<li class="list-group-item">
+			<ul class="list-group" >
+				<li class="list-group-item" id='uploadfile-panel'>
 					<div class="row toggle row-header" id="dropdown-detail-1" data-toggle="detail-1">
 						<div class="col-lg-10 panel-title">
 							Upload SRT File
@@ -289,6 +289,19 @@
 					$target.slideToggle();
 				});
 				
+				if (localStorage.getItem('urlparamexists') == "") {
+					
+
+				}
+
+				
+				var field = 'fn';
+				var url = window.location.href;
+				console.log("URL :", url)
+				if( url.indexOf('?' + field + '=')!=-1)
+				$('#uploadfile-panel').hide()
+
+
 				highlightText();
 
 				if (localStorage.getItem('selectedappversion') == '') {

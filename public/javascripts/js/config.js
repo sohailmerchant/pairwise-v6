@@ -50,19 +50,20 @@
   
   exports.srt_data_mappingV2 = [
 
-    { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
-    { key: 'book1_y1', cell: 2, type: 'number' },
-    { key: 'book1_y2', cell: 3, type: 'number' },
-    { key: 'book1_raw_content', cell: 8, type: 'string' },
-    { key: 'book1_content', cell: 8, type: 'normalizedText' },
+    { key: 'book1_id', key2: 'book1_chunk', cell: 12, type: 'extract' },
+    { key: 'book1_y1', cell: 3, type: 'number' },
+    { key: 'book1_y2', cell: 8, type: 'number' },
+    { key: 'book1_raw_content', cell: 18, type: 'string' },
+    { key: 'book1_content', cell: 18, type: 'normalizedText' },
 
     // old v2 values 10, 12,13, 18 (Feb19)
     // new v2 values 11, 13,14,19
-    { key: 'book2_id', key2: 'book2_chunk', cell: 11, type: 'extract' },
-    { key: 'book2_y1', cell: 13, type: 'number' },
-    { key: 'book2_y2', cell: 14, type: 'number' },
+    { key: 'book2_id', key2: 'book2_chunk', cell: 13, type: 'extract' },
+    { key: 'book2_y1', cell: 4, type: 'number' },
+    { key: 'book2_y2', cell: 9, type: 'number' },
     { key: 'book2_raw_content', cell: 19, type: 'string' },
     { key: 'book2_content', cell: 19, type: 'normalizedText' }
+    
 
     // { key: 'book1_id', key2: 'book1_chunk', cell: 0, type: 'extract' },
     // { key: 'book1_y1', cell: 2, type: 'number' },

@@ -14,13 +14,16 @@ onmessage = function (e) {
 
 
   loadXhr(srtFileUrl, onSrtTextLoaded);
+  
+   
   function onSrtTextLoaded(srtDataText) {
     var srtData;
     loadXhr(config.meta_data_path, function (metaDataText) {
       postMessage([srtData, parseMetaDataFile(metaDataText, config, bookUris)]);
 
-    });
-    //console.log(srtDataText);
+    });""
+    console.log("SRT DATA " + srtDataText);
+
     srtData = parseSrtFile(srtDataText, config);
 
   }
@@ -75,21 +78,23 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 }
 
 function loadXhr(url, callback) {
+  //url = "http://dev.kitab-project.org/passim01022020/JK000050-ara1.completed/JK000050-ara1.completed_JK000001-ara1.csv"
   var baseUrl = location.href.replace(location.pathname, '/');
   var xhr = new XMLHttpRequest();
-  console.log(url);
+  //console.log(url);
   xhr.open('GET', baseUrl + url, true);
+  //xhr.open('GET', url, true);
   xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         callback(xhr.responseText);
       } else {
-        console.error(xhr.statusText);
+       // console.error(xhr.statusText);
       }
     }
   };
   xhr.onerror = function (e) {
-    console.error(xhr.statusText);
+    //console.error(xhr.statusText);
   };
   xhr.send(null);
 }
@@ -108,15 +113,15 @@ var typesForConversion = {
 
 function extractRow(row, mapping) {
 
-  console.log("r1: " + row)
-  console.log("m1: " + mapping)
+  //console.log("r1: " + row)
+  //console.log("m1: " + mapping)
   
   return mapping.reduce(function (output, schema) {
     //console.log(typesForConversion[schema.type])
     var process = typesForConversion[schema.type];
     //console.log("MAPPING:" + schema.cell);
     process(output, row[schema.cell], schema);
-    console.log(row)
+    //console.log(row)
     return output;
     
   }, {});
