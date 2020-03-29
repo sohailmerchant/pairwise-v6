@@ -20,6 +20,7 @@
     var reader = new FileReader();
     reader.onloadend = function () {
       window.currentText = reader.result;
+      console.log(window.currentText)
       //d3.select('#bulkLoader').style('display', null);
       d3.select('#dataTable').style('display', 'none');
       setTimeout(function () {

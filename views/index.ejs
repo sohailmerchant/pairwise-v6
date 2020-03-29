@@ -12,9 +12,9 @@
 
 	<meta charset="utf-8">
 	<title>KITAB - D3 Visualisation</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/loader.css">
-	<script type="text/javascript" src="javascripts/vendors/d3.v4.js"></script>
+	<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="./stylesheets/loader.css">
+	<script type="text/javascript" src="./javascripts/vendors/d3.v4.js"></script>
 	<script src="javascripts/js/script.js"></script>
 	<script src="javascripts/js/config.js"></script>
 	<script src="javascripts/js/utils.js"></script>
@@ -35,14 +35,14 @@
 
 
 			</div>
-			<div class="fluid-row">
+			<div class="fluid-row" id="instruction-row">
 
 				<p class='instruction'>This KITAB app can generate visualisation for V1 and V2 type of srt files.  The V1 srt files for the whole corpus are available <a href='http://dev.kitab-project.org/passim1017/' target='_blank'>here.</a> 
 					The file needs to be exacted before I can  be used to generate visualisation
 					<br/>		
 					<br/> V2 SRT (Sira) files are available <a href='http://dev.kitab-project.org/passim01022019' target='_blank'>here</a>.
 					 The default SRT (V2) file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
-				<p class='instruction'>May 2019</p>
+				<p class='instruction'>March 2020</p>
 			</div>
 			<ul class="list-group" >
 				<li class="list-group-item" id='uploadfile-panel'>
@@ -299,7 +299,9 @@
 				var url = window.location.href;
 				console.log("URL :", url)
 				if( url.indexOf('?' + field + '=')!=-1)
-				$('#uploadfile-panel').hide()
+				$('#uploadfile-panel').hide();
+				$('#instruction-row').hide();
+				
 
 
 				highlightText();

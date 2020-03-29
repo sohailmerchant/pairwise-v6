@@ -22,7 +22,7 @@ onmessage = function (e) {
       postMessage([srtData, parseMetaDataFile(metaDataText, config, bookUris)]);
 
     });""
-    console.log("SRT DATA " + srtDataText);
+    //console.log("SRT DATA " + srtDataText);
 
     srtData = parseSrtFile(srtDataText, config);
 

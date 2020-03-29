@@ -9,7 +9,7 @@ var uploadRouter = require('./routes/upload');
 
 var app = express();
 // app.use(formidable());
-console.log(__dirname);
+//console.log(__dirname);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+
 // app.use('/upload',uploadRouter);
 app.use('/',uploadRouter);
 
@@ -43,3 +44,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+//module.exports = indexRouter;
+//module.exports = uploadRouter;

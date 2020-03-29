@@ -3,6 +3,7 @@
 
   exports.bookSequence = ['book1', 'book2'];
   exports.srt_data_path = 'data-file/{file_name}';
+  //exports.srt_data_path = 'C:\\Downloads\\data-file-new\\{file_name}';
   exports.meta_data_path = 'data-file/metadata.txt';
   exports.web_worker_path = {
     load_chunks: 'javascripts/web-worker/load-chunks-worker.js',
@@ -31,7 +32,6 @@
     // { key: 'github_url', cell: 7, type: 'string' },
   ];
   exports.meta_data_book_id_cell = exports.meta_data_mapping[0].cell;
-
 
   exports.srt_data_mapping = [
   

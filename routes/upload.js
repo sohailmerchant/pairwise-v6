@@ -11,7 +11,10 @@ const formidable = require('formidable');
 
         form.on('fileBegin', function (name, file) {
           //file.path = __dirname + '/../public/data-file/book1_book2.srt'; //+ file.name;
-            file.path = __dirname + '/../public/data-file/'+ file.name;
+           file.path = __dirname + '/../public/data-file/'+ file.name;
+           
+           
+            
         });
 
         form.on('file', function (name, file) {
@@ -25,8 +28,9 @@ const formidable = require('formidable');
     });
 
     router.get('/:filename', function (req, res, next) {
-        console.log("req "+req.params('filename'));
+        console.log("req "+req.query('filename'));
         res.render('/dd');
     });
+    
 // }
 module.exports = router;
