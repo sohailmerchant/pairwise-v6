@@ -41,7 +41,9 @@ router.get('/bulkrenderSrt/q', function (req, res, next) {
   var pairname = req.query.fn
   book1 = pairname.split('_')[0] + "/"
   downloadURL = baseUrl + book1 + pairname
-  tempfile = path.resolve(".") + '\\public\\data-file\\' + 'tempfile.csv'
+  tempfile = __dirname + '/../public/data-file/' + 'tempfile.csv'
+  //tempfile = path.resolve(".") + '\\public\\data-file\\' + 'tempfile.csv'
+  console.log()
 
   var file = fs.createWriteStream(tempfile);
   //console.log(dest)
