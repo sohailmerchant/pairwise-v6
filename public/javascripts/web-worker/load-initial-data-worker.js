@@ -135,7 +135,7 @@ function extractIdAndMs(txtString) {
     // This regex ignore .completed/inProgress/mARkdown ignore
     //var match = txtString.match(/(\w+)-\w+?\.(\d+)/);
     var match = txtString.match(/(\w+)-ara1(?:\.\w+?)?\.ms(\d+)/);
-    console.log(match)
+    //console.log(match)
     //var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
   }
 

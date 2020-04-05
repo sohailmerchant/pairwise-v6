@@ -4,7 +4,7 @@ const formidable = require('formidable');
 
 // if(window.getElementById("uploadBox").value != "") {
     // you have a file
-    router.post('/', (req, res) => {
+    router.post('/visualise', (req, res) => {
         var form = new formidable.IncomingForm();
 
         form.parse(req);
@@ -21,16 +21,16 @@ const formidable = require('formidable');
             if (file.name == "")
                 res.render('index', {names: ""})
             else
-                res.render('index', {names: file.name});
+                res.render('visualise', {names: file.name});
         });
        
      //res.redirect('/');
     });
 
-    router.get('/:filename', function (req, res, next) {
-        console.log("req "+req.query('filename'));
-        res.render('/dd');
-    });
+    // router.get('/:filename', function (req, res, next) {
+    //     console.log("req "+req.query('filename'));
+    //     res.render('/dd');
+    // });
     
 // }
 module.exports = router;

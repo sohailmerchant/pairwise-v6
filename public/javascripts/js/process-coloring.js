@@ -1,8 +1,11 @@
 'use strict';
+
 window.processColoring = (function () {
 
   return function processColoring(text1, text2, colorClass) {
+    
     var output = '';
+
     for (var globalIndex = 0; globalIndex < text1.length; globalIndex++) {
       if (text2[globalIndex] === undefined || text1[globalIndex] === text2[globalIndex]) {
         text1Append(globalIndex);
@@ -22,6 +25,7 @@ window.processColoring = (function () {
     }
     return output;
     function compareOmission(j) {
+      
       return text1[j] === '-';
     }
     function compareInsertion(j) {

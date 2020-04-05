@@ -89,7 +89,7 @@ function loadBook(bookName, pageNumber, pageIndex, config) {
   url = url.replace('{book_id}', bookData.book_id);
   url = url.replace('{page_string}', prefixString(pageNumber, config.page_string_format));
   var xhr = new XMLHttpRequest();
-  console.log(url);
+  //console.log(url);
   xhr.open('GET', url, true);
   xhr.onload = function (e) {
     if (xhr.readyState === 4) {
@@ -122,7 +122,7 @@ function parseText(pageStr, bookName) {
       row = row.split('\t');
      
      var chunkNumber = Number(row[0].replace('ms', ''));
-     console.log("CH:" + chunkNumber)
+     //console.log("CH:" + chunkNumber)
       //var chunkNumber = Number(row[0].split('',''));
       
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
@@ -130,7 +130,7 @@ function parseText(pageStr, bookName) {
       }
     }
   });
-  console.log("load chunks" + data);
+  //console.log("load chunks" + data);
   
   return data;
 }

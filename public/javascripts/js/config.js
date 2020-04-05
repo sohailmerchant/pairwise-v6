@@ -4,10 +4,10 @@
   exports.bookSequence = ['book1', 'book2'];
   exports.srt_data_path = 'data-file/{file_name}';
   //exports.srt_data_path = 'C:\\Downloads\\data-file-new\\{file_name}';
-  exports.meta_data_path = 'data-file/metadata.txt';
+  exports.meta_data_path = 'data-file/metadata-april2020.txt';
   exports.web_worker_path = {
-    load_chunks: 'javascripts/web-worker/load-chunks-worker.js',
-    load_inial_data: 'javascripts/web-worker/load-initial-data-worker.js'
+    load_chunks: '/javascripts/web-worker/load-chunks-worker.js',
+    load_inial_data: '/javascripts/web-worker/load-initial-data-worker.js'
   };
   exports.book_content_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-ara1-{page_string}';
   exports.book_github_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-ara1';
@@ -22,12 +22,12 @@
   // METADATA FILE MAPPING
   exports.meta_data_mapping = [
     { key: 'book_id', cell: 0, type: 'string' },
-    { key: 'book_author', cell: 1, type: 'string' },
-    // { key: 'author_died', cell: 2, type: 'string' },
-    { key: 'book_title', cell: 3, type: 'string' },
-    { key: 'book_word_count', cell: 4, type: 'number' },
-    { key: 'book_chunk_count', cell: 4, type: 'ceil', use: exports.chunk_size },
-    { key: 'book_uri', cell: 5, type: 'string' },
+    { key: 'book_author', cell: 3, type: 'string' },
+    { key: 'author_died', cell: 2, type: 'string' },
+    { key: 'book_title', cell: 4, type: 'string' },
+    { key: 'book_word_count', cell: 5, type: 'number' },
+    { key: 'book_chunk_count', cell: 5, type: 'ceil', use: exports.chunk_size },
+    { key: 'book_uri', cell: 7, type: 'string' },
     // { key: 'book_cat', cell: 6, type: 'string' },
     // { key: 'github_url', cell: 7, type: 'string' },
   ];

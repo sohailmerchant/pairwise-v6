@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<% include heads.ejs %>	
+</head>
+
+<body>
+	
+ <% include header.ejs %>
+
+	<div style="float: left;">
+		
+	</div>
+	
+			<div id='wrapper'>
+			
+	<div class="container ">
+		<br/>
+		<div class="panel-heading">
+			<h4 class="panel-title">Pairwise Book Visualisation</h4>
+
+
+
+		</div>
+		<div class="panel panel-default">
+			
+			<div class="fluid-row" id="instruction-row" style="display: none;">
+
+				<p class='instruction'>This KITAB app can generate visualisation for V1 and V2 type of srt files.  The V1 srt files for the whole corpus are available <a href='http://dev.kitab-project.org/passim1017/' target='_blank'>here.</a> 
+					The file needs to be exacted before I can  be used to generate visualisation
+					<br/>		
+					<br/> V2 SRT (Sira) files are available <a href='http://dev.kitab-project.org/passim01022019' target='_blank'>here</a>.
+					 The default SRT (V2) file loaded to this visualisation is Shamela0026039-ara1_JK000467-ara1. 'Choose-File' and click upload to generate the visualisation.</p>
+				<p class='instruction'>March 2020</p>
+			</div>
+			<ul class="list-group" >
+				<li class="list-group-item" id='uploadfile-panel'>
+					<div class="row toggle row-header" id="dropdown-detail-1" data-toggle="detail-1">
+						<div class="col-lg-10 panel-title">
+							<i class="fa fa-upload boot-padding-5px icon-color" aria-hidden="true"></i>
+
+							Upload SRT/CSV File
+
+
+
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-1">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div>
+									<input type="radio" id="v1" name="version" value="1">
+									<label for="v1">V1 - October 2017 - <a href='http://dev.kitab-project.org/passim1017/' target="_blank">SRT/CSV Here</a></label>
+								</div>
+
+								<div>
+									<input type="radio" id="v2" name="version" value="2">
+									<label for="v2">V2 - January 2019 - <a href='http://dev.kitab-project.org/passim01022019/' target="_blank">SRT/CSV Here</a></label>
+								</div>
+								<div id="file-upload">
+									<!--<p clas="half-width">Upload a file:</p>-->
+									<!--<form action="/upload" enctype="multipart/form-data" method="post">-->
+									<form action="/visualise" enctype="multipart/form-data" method="post">
+										<!--<input type="file" name="file-to-upload" class="inline">-->
+										<!--<input type="submit" value="upload" class="inline">-->
+										<label class="up_styles">
+											<input type="file" accept=".srt, .csv, .gz" name="upload" />
+										</label>
+										<!--<br>-->
+										<!-- Button to upload the choosed files -->
+										<input  type="submit" value="Upload" class='btn btn-primary'>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-2" data-toggle="detail-2">
+						
+						<div class="col-lg-10 panel-title">
+							<i class="fas fa-book fa-2x boot-padding-5px icon-color"></i>					
+							Books Metadata
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					
+
+						<div class="container biblographical">
+							<div class="fluid-row" id="book-details-container">
+
+							</div>
+						</div>
+					
+				</li>
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-3" data-toggle="detail-3">
+						
+						<div class="col-lg-10 panel-title ">
+							<i class="far fa-chart-bar fa-2x boot-padding-5px icon-color"></i>
+							Visualisation
+						</div>
+						<div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-3">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div id="madin" class="col-lg-12">
+									<div id="chartBox"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+
+
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-4" data-toggle="detail-4">
+						<div class="col-lg-10 panel-title">
+							
+							<i class="fas fa-align-right fa-2x boot-padding-5px icon-color"></i>
+							Books Alignments
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-4">
+
+						<div class="container">
+							<div class="fluid-row">
+								<div id="bottomPanelRaw" style="display: none;">
+									<div class="col-xs-6 arabic-text-18px">
+
+
+										<div id="b1MilestoneID"></div>
+										<div id="book1RawContent">
+
+										</div>
+
+									</div>
+
+
+									<div class="col-xs-6 arabic-text-18px">
+
+										<div id="b2MilestoneID"></div>
+										<div id="book2RawContent"></div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="row toggle row-header" id="dropdown-detail-5" data-toggle="detail-5">
+						<div class="col-lg-10 panel-title">
+							
+							<i class="fas fa-book-open fa-2x boot-padding-5px icon-color"></i>
+							Books
+						</div>
+						<div class="col-lg-2"><i class="fa fa-chevron-down pull-right"></i></div>
+					</div>
+					<div id="detail-5">
+
+						<div class="container ">
+							<div class="fluid-row">
+								<div class="col-lg-12">
+
+									<div id="book-content-container" style="opacity: 0; display: none">
+
+										<a id="closeBtn" href="javascript:void(0)" class="closebtn">&times;</a>
+
+										<div class="fluid-row reader-menu">
+
+											<div class="col-lg-6">
+												<label id="book1StartBtn" class="loader-btn book1">LOAD MORE</label>
+											</div>
+											<div class="col-lg-6 loafder-btn-wrapper">
+												<label id="book2StartBtn" class="loader-btn book2">LOAD MORE</label>
+											</div>
+
+
+										</div>
+
+										<div class="fluid-row book-reader">
+											<div id="book1Content" class="book-content arabic-text-18px"></div>
+											<!--Book1 Loader [START]-->
+											<div id="book1Loader" class="book-content arabic-text-16px">
+												<div id="fountainG" style="top: 40%">
+													<div id="fountainG_1" class="fountainG"></div>
+													<div id="fountainG_2" class="fountainG"></div>
+													<div id="fountainG_3" class="fountainG"></div>
+													<div id="fountainG_4" class="fountainG"></div>
+													<div id="fountainG_5" class="fountainG"></div>
+													<div id="fountainG_6" class="fountainG"></div>
+													<div id="fountainG_7" class="fountainG"></div>
+													<div id="fountainG_8" class="fountainG"></div>
+												</div>
+											</div>
+											<!--Book1 Loader [END]-->
+
+											<div id="book2Content" class="book-content arabic-text-18px"></div>
+											<!--Book2 Loader [START]-->
+											<div id="book2Loader" class="book-content arabic-text-16px">
+												<div id="fountainG" style="top: 40%">
+													<div id="fountainG_1" class="fountainG"></div>
+													<div id="fountainG_2" class="fountainG"></div>
+													<div id="fountainG_3" class="fountainG"></div>
+													<div id="fountainG_4" class="fountainG"></div>
+													<div id="fountainG_5" class="fountainG"></div>
+													<div id="fountainG_6" class="fountainG"></div>
+													<div id="fountainG_7" class="fountainG"></div>
+													<div id="fountainG_8" class="fountainG"></div>
+												</div>
+											</div>
+											<!--Book2 Loader [END]-->
+
+
+
+
+										</div>
+
+										<div class="fluid-row reader-menu">
+											<div class="col-lg-6">
+												<label id="book1EndBtn" class="loader-btn book1">LOAD MORE</label>
+											</div>
+											<div class="col-lg-6">
+												<label id="book2EndBtn" class="loader-btn book2">LOAD MORE</label>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+		<script type="text/javascript" src="/javascripts/js/script.js"></script>
+		<script>
+
+
+			var book_names = '<%= names %>'.split("_");
+
+			var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/,"");
+			bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,"");
+			
+			bn2= book_names[1].replace(/(\-ara1)|(\.ara1)/,"");
+			bn2= bn2.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,"");
+			
+			bn2 = bn2.replace(/(\.csv)|(\.srt)|(\.completed)/, "");
+			
+
+			//book_names = book_names.split("-");
+			var filename = '<%= names %>';
+			var selectedappVersion;
+
+			renderVisual(filename, {
+				
+				//renderVisual('Shamela0035100_JK006838.srt', {
+					book1: bn1,
+					book2: bn2
+				// book1: book_names[0].replace('.ara1', ""),
+				// book2: book_names[1].replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,""),
+				// book2: book_names[1].replace(/(\.csv)|(\.srt)|(\.completed)/, "")
+
+			}, localStorage.getItem('selectedappversion'));
+			console.log("ddd: " + book_names);
+
+			$(document).ready(function () {
+				$('[id^=detail-]').show();
+				$('.toggle').click(function () {
+					$input = $(this);
+					$target = $('#' + $input.attr('data-toggle'));
+					$target.slideToggle();
+				});
+				
+				if (localStorage.getItem('urlparamexists') == "") {
+					
+
+				}
+
+				
+				var field = 'fn';
+				var url = window.location.href;
+				console.log("URL :", url)
+				if( url.indexOf('?' + field + '=')!=-1)
+				$('#uploadfile-panel').hide();
+				$('#instruction-row').hide();
+				
+
+
+				highlightText();
+
+				if (localStorage.getItem('selectedappversion') == '') {
+					localStorage.setItem('selectedappversion', 2);
+				}
+				
+				if (localStorage.getItem('selectedappversion') == 1)
+					$("#v1").prop("checked", true);
+				else
+					$("#v2").prop("checked", true);
+
+
+				$("input[name='version']").change(function () {
+					selectedappVersion = $("input[name='version']:checked").val();
+					localStorage.setItem('selectedappversion', $("input[name='version']:checked").val());
+				});
+			});
+
+			function highlightText() {
+				$('#book2RawContent').on(
+					'mouseup',
+					function () {
+						var fullString = $(this).text();
+						var targetString = $('#book1RawContent').text();
+						window.get
+						var objSelText = getSelectionText();
+						var position = targetString.indexOf(objSelText.text);
+						console.log(position);
+						if (position > -1) {
+
+							var newString = targetString.substring(0, position);
+							if (objSelText.text.length < position) {
+								newString = newString
+									+ '<span style="background-color:yellow;">'
+									+ targetString.substring(position,
+										objSelText.text.length + position)
+									+ '</span>';
+							} else {
+								newString = newString
+									+ '<span style="background-color:yellow;">'
+									+ targetString.substring(position,
+										objSelText.text.length) + '</span>';
+							}
+							newString = newString
+								+ targetString.substring((position)
+									+ objSelText.text.length);
+							$('#book1RawContent').html(newString);
+						}
+
+					});
+			}
+
+			function getSelectionText() {
+
+				var objSelText = new Array();
+				if (window.getSelection) {
+					objSelText.text = window.getSelection().toString();
+
+					objSelText.StartIndex = window.getSelection().anchorOffset;
+					objSelText.EndIndex = window.getSelection().focusOffset;
+				} else if (document.selection && document.selection.type != "Control") {
+					objSelText.text = document.selection.createRange().text;
+					objSelText.StartIndex = document.selection.createRange().anchorOffset;
+					objSelText.EndIndex = document.selection.createRange().focusOffset;
+				}
+				return objSelText;
+			}
+		</script>
+
+</body>
+
+</html>
