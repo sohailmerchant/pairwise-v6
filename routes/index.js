@@ -43,28 +43,28 @@ router.get('/bulkrenderSrt/q', function (req, res, next) {
   downloadURL = baseUrl + book1 + pairname
   tempfile = __dirname + '/../public/data-file/' + 'tempfile.csv'
   //tempfile = path.resolve(".") + '\\public\\data-file\\' + 'tempfile.csv'
-  console.log()
 
   var file = fs.createWriteStream(tempfile);
   //console.log(dest)
-  var request = http.get(downloadURL, function (response) {
-    results = [];
-    response.pipe(csv({ separator: '\t' }))
-      .on('data', (data) => {
-        results.push(data)
-       // console.log(results)
-      })
-      .on('error', function (err) { 
-        fs.unlink(dest); 
-        if (cb) cb(err.message);
-      })
-      .on('end', () => {    
-           //console.log(results);
-       });
-      
-  });
- 
-  res.render('bulksrtload', { csvObject: results });
+  if (downloadURL.endsWith('csv')) {
+    var request = http.get(downloadURL, function (response) {
+      results = [];
+      response.pipe(csv({ separator: '\t' }))
+        .on('data', (data) => {
+          results.push(data)
+          // console.log(results)
+        })
+        .on('error', function (err) {
+          fs.unlink(dest);
+          if (cb) cb(err.message);
+        })
+        .on('end', () => {
+          res.render('bulksrtload', { csvObject: results });
+        });
+
+    });
+  }
+
 });
 
 
@@ -100,7 +100,7 @@ router.get('/bulkrenderSrt/q', function (req, res, next) {
 
 /* GET home page. */
 
-router.get('/', function(req, res, next){
+router.get('/', function (req, res, next) {
   res.render('index');
 
 });
@@ -132,6 +132,13 @@ router.get('/visualise/q', function (req, res, next) {
 
   download(downloadURL, d)
   res.render('visualise', { names: pairname });
+});
+
+// router.get('/data', express.static('/mnt/c/Downloads/data-file-new/'));
+// console.log('/mnt/c/Downloads/data-file-new')
+
+router.get('/data', function (req, res, next) {
+  res.render('datafile')
 });
 
 module.exports = router;

@@ -28,6 +28,8 @@ app.use('/',uploadRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use('/data', express.static(__dirname + '/mnt/c/Downloads/data-file-new'));
+// console.log(__dirname + '/mnt/c/Downloads/data-file-new')
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
