@@ -15,7 +15,11 @@
   function replaceParams(string, replacements) {
     for (const paramName in replacements) {
       if (replacements[paramName] || replacements[paramName] === 0) {
+        console.log('repl'+ replacements[paramName] + " stirng " + string)
+
         string = string.replace('{' + paramName + '}', replacements[paramName]);
+        string
+        console.log(string)
       }
     }
     return string;

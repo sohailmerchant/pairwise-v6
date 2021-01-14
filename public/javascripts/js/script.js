@@ -1,24 +1,24 @@
 
 'use strict';
 (function () {
-  
+
 
   window.renderVisual = renderVisual;
-  
+
 
   function renderVisual(srtFileName, bookUris, appversion) {
-    config.appversion =  appversion;
-    console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
+    config.appversion = appversion;
+    //console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
     var workerConfig = utils.pick([
-      'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping','appversion','srt_data_mappingV2'
+      'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping', 'appversion', 'srt_data_mappingV2'
     ], {}, config);
 
 
     var loadInitialDataWorker = new Worker(config.web_worker_path.load_inial_data);
     loadInitialDataWorker.onmessage = onInitData;
-    
+
     console.log(config.appversion);
-    
+
 
     // book1: Top Bar Chart (x0)
     // book2: Bottom Bar Chart (x1)
@@ -26,7 +26,7 @@
     // y-axis: 0 to 100 for book1 and book2
     // x-axis: decided by maxValues function which returns {book1, book2, peek}
     // vertical layout :: 60 + 60
-    
+
     var isPanelOpened;
     var duration1 = 700, duration2 = 400;
 
@@ -56,16 +56,18 @@
     // graph.setLayout();
 
     function onInitData(e) {
-      
+      console.log("onInit" + e.data[0])
+
       var srtData = e.data[0];
       var selectedMetadata = e.data[1];
-      
+
       graph.setMaxValue(selectedMetadata.map(function (d) {
         return d.book_chunk_count;
       }));
 
       graph.initData(srtData);
-      // console.log(srtData)
+      //console.log(JSON.stringify(srtData))
+      //console.log("srt" +srtData)
       graph.setLayout();
 
       setTimeout(function () {
@@ -73,48 +75,47 @@
         graph.updateChart();
       }, 500);
 
-      
+
       bookDetails = d3.select(bookDiv).append('div');
       bookDetails.selectAll('div')
         .data(selectedMetadata)
-        
+
         .enter().append('div').attr('class', 'books-details')
-        
-        .append('p').attr('class','label')
-        
-        
-        .append('a').attr('href', function (d) { return utils.replaceParams(config.book_github_url, { 'book_id': d.book_id }); })
-        .text(function (d) { return 'Github Book URL: ' +  utils.replaceParams(config.book_github_url, { 'book_id': d.book_id }); });
 
-      bookDetails.selectAll('div')
-        .append('p').attr('class','label')
-        .text(function (d) { return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
-        
         bookDetails.selectAll('div')
-        .append('p').attr('class','label')
-        .text(function (d) { return 'Book Title: ' + d.book_title.replace(/([A-Z])/g, ' $1').trim(); });
+        .append('p').attr('class', 'label')
+        .html(function (d) { 
+         return "Book Title: " + "<a href='" + d.book_uri + "' target=_blank>" + d.book_title + "</a>" 
+        
+        }); 
+      bookDetails.selectAll('div')
+        .append('p').attr('class', 'label')
+        
+        .text(function (d) { return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
 
       bookDetails.selectAll('div')
-      .append('p').attr('class','label')
+        .append('p').attr('class', 'label')
+        .text(function (d) { return 'Book ID: ' + d.book_id});
+
+      bookDetails.selectAll('div')
+        .append('p').attr('class', 'label')
         .text(function (d) { return 'Word Count: ' + d.book_word_count; });
 
-      bookDetails.selectAll('div')
-      .append('p').attr('class','label')
-        .text(function (d) { return 'Book URI: ' + d.book_uri; });
-
      
-      
+
+
+
       // bookDetails.select('div')
       // .append('p').attr('class','label')
       // .text(selectedMetadata[1]["book_title"]);
-      
-      console.log(JSON.stringify(selectedMetadata[0]));
-      
-  
+
+
+
+
       eventBindings();
       //testing individual element of data
       var b1 = selectedMetadata[0]["book_author"]
-      console.log("B1 " + b1)
+      //console.log("B1 " + b1)
     };
 
     function eventBindings() {
@@ -163,6 +164,13 @@
         d3.select('#book-content-container').style('opacity', 0);
       }, 500);
     }
+
+    function pad(n, width, z) {
+      z = z || '0';
+      n = n + '';
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+   
 
     // --- Panel Events [END] :::
   };

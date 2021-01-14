@@ -9,8 +9,8 @@ var uploadRouter = require('./routes/upload');
 
 var app = express();
 // app.use(formidable());
-console.log(__dirname);
-app.use(express.static(path.join(__dirname, 'public')));
+//console.log(__dirname);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,9 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+
 // app.use('/upload',uploadRouter);
 app.use('/',uploadRouter);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use('/data', express.static(__dirname + '/mnt/c/Downloads/data-file-new'));
+// console.log(__dirname + '/mnt/c/Downloads/data-file-new')
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,3 +48,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+//module.exports = indexRouter;
+//module.exports = uploadRouter;

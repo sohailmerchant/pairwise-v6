@@ -4,24 +4,33 @@ const formidable = require('formidable');
 
 // if(window.getElementById("uploadBox").value != "") {
     // you have a file
-    router.post('/', (req, res) => {
+    router.post('/visualise', (req, res) => {
         var form = new formidable.IncomingForm();
 
         form.parse(req);
 
         form.on('fileBegin', function (name, file) {
           //file.path = __dirname + '/../public/data-file/book1_book2.srt'; //+ file.name;
-            file.path = __dirname + '/../public/data-file/'+ file.name;
+           file.path = __dirname + '/../public/data-file/'+ file.name;
+           
+           
+            
         });
 
         form.on('file', function (name, file) {
-            if (file.name == "" || file.name.split('.').pop() != 'srt')
-                res.render('index', {names: "Shamela0026039_JK000467.srt"})
+            if (file.name == "")
+                res.render('index', {names: ""})
             else
-                res.render('index', {names: file.name});
+                res.render('visualise', {names: file.name});
         });
        
      //res.redirect('/');
     });
+
+    // router.get('/:filename', function (req, res, next) {
+    //     console.log("req "+req.query('filename'));
+    //     res.render('/dd');
+    // });
+    
 // }
 module.exports = router;

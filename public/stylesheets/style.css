@@ -1,11 +1,33 @@
 body {
   font-size: 11px ;
-  font-family: 'Amiri', Arial, Helvetica, sans-serif  ;
+  font-family: 'Amiri', Arial, Helvetica, sans-serif;
   
+}
+#wrapper {
+
+ /* box-shadow: -1px 10px 18px 0px rgba(0,0,0,0.65);
+  -moz-box-shadow: -1px 10px 18px 0px rgba(0,0,0,0.65);
+  box-shadow: -1px 10px 18px 0px rgba(0,0,0,0.65);
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px; */
+
+margin-left: 5%;  
+
+width: 90%;
+
+border: 0px solid #000000;
+margin-bottom: 10px;
+
+
+}
+
+.element { transform: translate(0, 0%);
 }
 .container{
 
-  padding: 0px 0px;
+ 
+
 }
 * Style the header with a grey background and some padding */
 .header {
@@ -145,17 +167,20 @@ div.tooltip {
   float:left;
   border: 0px red solid;
   margin-right: 30px;
-  
-  
+  width: 45%;
+  }
+
+.biblographical{
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
   
 }
 
 .books-details-container{
 
-  
   display: block;
   margin-bottom: 20px;
-  
   padding-bottom: 10px;
   padding-top: 10px;
   border-bottom: #e0e0e0 1px dashed;
@@ -165,12 +190,27 @@ div.tooltip {
 /*--Books View Bottom Panel -- [START]--*/
 
 .panel {
-  bdackground-image: url(../Images/icons/education31.png);
+  bdackground-image: url(../images/book.png);
   background-position: 10px 6px;
   background-repeat: no-repeat;
   pdadding-left: 40px;
+  border: 0px;
+  
 
 
+}
+.boot-padding-5px{
+
+  margin-right: 10px;
+
+}
+
+.icon-color{
+
+  color: #2863A5;
+  color: #EC407A;
+  color: #CB2230;
+  font-size: 1.5em;
 }
 
 .book-reader{
@@ -202,16 +242,19 @@ float: left;
 
   padding: 0px;
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   color:black;
   text-align: left;
   font-weight: normal;
-  word-wrap: break-word;
+  word-wrap: break-word!important;
+  line-height: 1.3;
+  white-space: unset!important;
+  
   
 }
 
 #book-details-container{
-  padding: 15px;
+  pdadding: 10px;
 }
 .selection-chunk{
 
@@ -336,13 +379,35 @@ text-align: right
 
 }
 
+.legend-width{
+
+  
+  display: inline;
+  padding: 5px;
+  margin: 3px;
+
+}
+
 .difference-deletion {
   color: #db4437;
+    background-color: #db4437;
+    color: #fff;
+    
+
   
+}
+.matched{
+  background-color: black;
+
+}
+#book2Alignment, #book1Alignment{
+line-height: 2;
 }
 
 .difference-addition {
-  color: #5cb85c;
+  color: green;
+  background-color: #a3eec5;
+  color:black
 }
 .bulk-read{
 
@@ -425,10 +490,17 @@ text-align: right
   margin: 0 auto;
   padding: 10px 0;
   display: block;
-  background: #219150;
+  background: #2863A5;
   color: #fff;
   cursor: pointer;
   text-align: center;
+}
+
+.nav{
+
+font-size: 15px;
+color:#2863A5;
+
 }
 
 .nav-btn {
@@ -470,17 +542,20 @@ text-align: right
   padding: 8px;
 }
 
-.difference-deletion {
-  
-  color: #db4437;
-  color: #FB2B11;
+
+.label{
+
+  display: block;
+    padding: .2em .6em .3em;
+    font-size: 95%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
 }
 
-.difference-addition {
- 
-  color: #5cb85c;
-  color: #39FF14
-}
 
 table#dataTable {
   border-collapse: separate;
@@ -567,10 +642,10 @@ table#dataTable {
   border-bottom-right-radius: 5px;
 }
 
-#dataTable tbody:hover > tr td {
+/* #dataTable tbody:hover > tr td {
   filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
-}
+} */
 
 #dataTable tbody:hover > tr:hover td {
   text-shadow: none;
@@ -579,3 +654,63 @@ table#dataTable {
   opacity: 1;
   transition: 0.2s all;
 }
+
+/* Card CSS */
+.card-counter{
+  box-shadow: 2px 2px 10px #DADADA;
+  margin: 5px;
+  padding: 20px 10px;
+  background-color: #fff;
+  height: 100px;
+  border-radius: 7px;
+  transition: .3s linear all;
+}
+
+.card-counter:hover{
+  box-shadow: 4px 4px 20px #DADADA;
+  transition: .3s linear all;
+}
+
+.card-counter.primary{
+  background-color: #007bff;
+  color: #FFF;
+}
+
+.card-counter.danger{
+  background-color: #ef5350;
+  color: #FFF;
+}  
+
+.card-counter.success{
+  background-color: #66bb6a;
+  color: #FFF;
+}  
+
+.card-counter.info{
+  background-color: #26c6da;
+  color: #FFF;
+}  
+
+.card-counter i{
+  font-size: 5em;
+  opacity: 0.2;
+}
+
+.card-counter .count-numbers{
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  font-size: 32px;
+  display: block;
+}
+
+.card-counter .count-name{
+  position: absolute;
+  right: 35px;
+  top: 65px;
+  text-transform: capitalize;
+  opacity: 0.5;
+  display: block;
+  font-size: 18px;
+}
+/* Card CSS Ends */

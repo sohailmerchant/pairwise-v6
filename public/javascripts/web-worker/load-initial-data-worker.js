@@ -1,31 +1,39 @@
+
+
 var appversion;
 onmessage = function (e) {
   var srtFileUrl = e.data[0];
-  console.log("url " + JSON.stringify(e.data[0]));
+  //console.log("url " + JSON.stringify(e.data[0]));
   var bookUris = e.data[1];
-  console.log("data1 " + JSON.stringify(e.data[1]));
+  //console.log("data1 " + JSON.stringify(e.data[1]));
   var config = e.data[2];
-  console.log(e.data);
+  //console.log(e.data);
   appversion = e.data[2]['appversion']
-  console.log("conf " + JSON.stringify(config));
+  //console.log("conf " + JSON.stringify(config));
   var output = [];
 
 
   loadXhr(srtFileUrl, onSrtTextLoaded);
+  
+   
   function onSrtTextLoaded(srtDataText) {
     var srtData;
     loadXhr(config.meta_data_path, function (metaDataText) {
       postMessage([srtData, parseMetaDataFile(metaDataText, config, bookUris)]);
 
-    });
-    //console.log(srtDataText);
+    });""
+    //console.log("SRT DATA " + srtDataText);
+
     srtData = parseSrtFile(srtDataText, config);
 
   }
 }
 
+
 function parseSrtFile(fileStr, config) {
+  
   var data = [];
+
 
   fileStr.split('\n').forEach(function (row) {
 
@@ -54,6 +62,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 
   fileStr.split('\n').some(function (row) {
     if (row) {
+      console.log(row)
       row = row.split('\t');
       var bookId = row[config.meta_data_book_id_cell];
       if (bookIdHash[bookId]) {
@@ -70,21 +79,23 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 }
 
 function loadXhr(url, callback) {
+  //url = "http://dev.kitab-project.org/passim01022020/JK000050-ara1.completed/JK000050-ara1.completed_JK000001-ara1.csv"
   var baseUrl = location.href.replace(location.pathname, '/');
   var xhr = new XMLHttpRequest();
-  console.log(url);
+  //console.log(url);
   xhr.open('GET', baseUrl + url, true);
+  //xhr.open('GET', url, true);
   xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         callback(xhr.responseText);
       } else {
-        console.error(xhr.statusText);
+       // console.error(xhr.statusText);
       }
     }
   };
   xhr.onerror = function (e) {
-    console.error(xhr.statusText);
+    //console.error(xhr.statusText);
   };
   xhr.send(null);
 }
@@ -103,10 +114,17 @@ var typesForConversion = {
 
 function extractRow(row, mapping) {
 
+  //console.log("r1: " + row)
+  //console.log("m1: " + mapping)
+  
   return mapping.reduce(function (output, schema) {
+    //console.log(typesForConversion[schema.type])
     var process = typesForConversion[schema.type];
+    //console.log("MAPPING:" + schema.cell);
     process(output, row[schema.cell], schema);
+    //console.log(row)
     return output;
+    
   }, {});
 }
 
@@ -115,7 +133,11 @@ function extractIdAndMs(txtString) {
     var match = txtString.match(/(\w+)_(\d+)/);
   }
   else {
-    var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
+    // This regex ignore .completed/inProgress/mARkdown ignore
+    //var match = txtString.match(/(\w+)-\w+?\.(\d+)/);
+    var match = txtString.match(/(\w+)-ara1(?:\.\w+?)?\.ms(\d+)/);
+    //console.log(match)
+    //var match = txtString.match(/(\w+)-ara1\.ms(\d+)/);
   }
 
   if (match) {
