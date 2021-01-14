@@ -117,7 +117,8 @@
         name1: 12,
         name2: 13,
         content1: 18,
-        content2: 19
+        content2: 19,
+        wordmatched: 27
 
       };
 
@@ -137,10 +138,10 @@
     d3.selectAll('#dataTable #test tr:not(#rowTemplate)').remove();
 
     if (localStorage.getItem('version') == 2 || localStorage.getItem('version') == 3) {
-      //processRow(inputRows.shift(), true);    // ##1 line deals first row as header
+       processRow(inputRows.shift(), true);    // ##1 line deals first row as header
     }
     inputRows.forEach(function (dataRow) {
-
+      
       processRow(dataRow, window.isMarkingsOn);
       aggregatedTotals.totalWordMatch.push(parseInt(dataRow[col.b1]));
     });
@@ -148,6 +149,7 @@
     d3.select('#dataTable').style('display', null);
     
     function processRow(dataRow, isMarkingOn) {
+
       var nodeClone = document.getElementById('rowTemplate').cloneNode(true);
 
       //console.log(nodeClone)
@@ -156,7 +158,8 @@
 
       var params = {
         book1Name: dataRow[col.name1],
-        book2Name: dataRow[col.name2]
+        book2Name: dataRow[col.name2],
+        wordmatched: dataRow[col.wordmatched]
 
 
       };

@@ -4,7 +4,8 @@
   exports.bookSequence = ['book1', 'book2'];
   exports.srt_data_path = 'data-file/{file_name}';
   //exports.srt_data_path = 'C:\\Downloads\\data-file-new\\{file_name}';
-  exports.meta_data_path = 'data-file/metadata-april2020.txt';
+  //exports.meta_data_path = 'data-file/metadata-april2020.txt';
+  exports.meta_data_path = 'data-file/OpenITI-metadata-05012021.txt';
   exports.web_worker_path = {
     load_chunks: '/javascripts/web-worker/load-chunks-worker.js',
     load_inial_data: '/javascripts/web-worker/load-initial-data-worker.js'
@@ -22,8 +23,8 @@
   // METADATA FILE MAPPING
   exports.meta_data_mapping = [
     { key: 'book_id', cell: 0, type: 'string' },
-    { key: 'book_author', cell: 3, type: 'string' },
     { key: 'author_died', cell: 2, type: 'string' },
+    { key: 'book_author', cell: 3, type: 'string' },
     { key: 'book_title', cell: 4, type: 'string' },
     { key: 'book_word_count', cell: 5, type: 'number' },
     { key: 'book_chunk_count', cell: 5, type: 'ceil', use: exports.chunk_size },
@@ -32,7 +33,7 @@
     // { key: 'github_url', cell: 7, type: 'string' },
   ];
   exports.meta_data_book_id_cell = exports.meta_data_mapping[0].cell;
-
+  
   exports.srt_data_mapping = [
   
     { key: 'book1_id', key2: 'book1_chunk', cell: 8, type: 'extract' },

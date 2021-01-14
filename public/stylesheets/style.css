@@ -379,13 +379,35 @@ text-align: right
 
 }
 
+.legend-width{
+
+  
+  display: inline;
+  padding: 5px;
+  margin: 3px;
+
+}
+
 .difference-deletion {
   color: #db4437;
+    background-color: #db4437;
+    color: #fff;
+    
+
   
+}
+.matched{
+  background-color: black;
+
+}
+#book2Alignment, #book1Alignment{
+line-height: 2;
 }
 
 .difference-addition {
   color: green;
+  background-color: #a3eec5;
+  color:black
 }
 .bulk-read{
 
@@ -520,18 +542,20 @@ color:#2863A5;
   padding: 8px;
 }
 
-.difference-deletion {
-  
-  color: #db4437;
-  color: #FB2B11;
+
+.label{
+
+  display: block;
+    padding: .2em .6em .3em;
+    font-size: 95%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
 }
 
-.difference-addition {
- 
-  color: #5cb85c;
-  color: #39FF14;
-  color: #5cb85c;
-}
 
 table#dataTable {
   border-collapse: separate;

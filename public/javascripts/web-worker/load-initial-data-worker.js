@@ -62,6 +62,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 
   fileStr.split('\n').some(function (row) {
     if (row) {
+      console.log(row)
       row = row.split('\t');
       var bookId = row[config.meta_data_book_id_cell];
       if (bookIdHash[bookId]) {

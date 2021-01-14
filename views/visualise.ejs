@@ -106,6 +106,10 @@
 
 					</li>
 					<li class="list-group-item">
+						<div id="spinner" style="text-align: center;">
+							<img src="/images/spinner1.gif" width="500px" />
+						  </div>
+
 						<div class="row toggle row-header" id="dropdown-detail-3" data-toggle="detail-3">
 
 							<div class="col-lg-10 panel-title ">
@@ -259,35 +263,34 @@
 		<script type="text/javascript" src="/javascripts/js/script.js"></script>
 		<script>
 
+			$(window).load(function () {
 
-			var book_names = '<%= names %>'.split("_");
+				$('#spinner').hide();
+				var book_names = '<%= names %>'.split("_");
+				var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/, "");
+				bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
+				bn2 = book_names[1].replace(/(\-ara1)|(\.ara1)/, "");
+				bn2 = bn2.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
+				bn2 = bn2.replace(/(\.csv)|(\.srt)|(\.completed)/, "");
 
-			var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/, "");
-			bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
+				//book_names = book_names.split("-");
+				var filename = '<%= names %>';
+				var selectedappVersion;
 
-			bn2 = book_names[1].replace(/(\-ara1)|(\.ara1)/, "");
-			bn2 = bn2.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
+				renderVisual(filename, {
 
-			bn2 = bn2.replace(/(\.csv)|(\.srt)|(\.completed)/, "");
+					//renderVisual('Shamela0035100_JK006838.srt', {
+					book1: bn1,
+					book2: bn2
+					// book1: book_names[0].replace('.ara1', ""),
+					// book2: book_names[1].replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,""),
+					// book2: book_names[1].replace(/(\.csv)|(\.srt)|(\.completed)/, "")
 
-
-			//book_names = book_names.split("-");
-			var filename = '<%= names %>';
-			var selectedappVersion;
-
-			renderVisual(filename, {
-
-				//renderVisual('Shamela0035100_JK006838.srt', {
-				book1: bn1,
-				book2: bn2
-				// book1: book_names[0].replace('.ara1', ""),
-				// book2: book_names[1].replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/,""),
-				// book2: book_names[1].replace(/(\.csv)|(\.srt)|(\.completed)/, "")
-
-			}, localStorage.getItem('selectedappversion'));
-			console.log("ddd: " + book_names);
+				}, localStorage.getItem('selectedappversion'));
+			});
 
 			$(document).ready(function () {
+			
 				$('[id^=detail-]').show();
 				$('.toggle').click(function () {
 					$input = $(this);
@@ -303,7 +306,6 @@
 
 				var field = 'fn';
 				var url = window.location.href;
-				console.log("URL :", url)
 				if (url.indexOf('?' + field + '=') != -1)
 					$('#uploadfile-panel').hide();
 				$('#instruction-row').hide();
@@ -326,6 +328,8 @@
 					selectedappVersion = $("input[name='version']:checked").val();
 					localStorage.setItem('selectedappversion', $("input[name='version']:checked").val());
 				});
+			
+				$('#spinner').show();
 			});
 
 			function highlightText() {
@@ -337,7 +341,7 @@
 						window.get
 						var objSelText = getSelectionText();
 						var position = targetString.indexOf(objSelText.text);
-						console.log(position);
+						//console.log(position);
 						if (position > -1) {
 
 							var newString = targetString.substring(0, position);
@@ -377,6 +381,7 @@
 				}
 				return objSelText;
 			}
+
 		</script>
 
 </body>

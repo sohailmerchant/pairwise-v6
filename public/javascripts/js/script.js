@@ -66,7 +66,8 @@
       }));
 
       graph.initData(srtData);
-      console.log("srt" + srtData)
+      //console.log(JSON.stringify(srtData))
+      //console.log("srt" +srtData)
       graph.setLayout();
 
       setTimeout(function () {
@@ -89,7 +90,7 @@
         }); 
       bookDetails.selectAll('div')
         .append('p').attr('class', 'label')
-
+        
         .text(function (d) { return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
 
       bookDetails.selectAll('div')

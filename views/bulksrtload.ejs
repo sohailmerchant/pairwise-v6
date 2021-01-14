@@ -9,10 +9,15 @@
 
   <script type="text/javascript" src="/javascripts/vendors/FileSaver.js"></script>
   <script type="text/javascript" src="/javascripts/js/import-export.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   -->
 
   <script>
 
     $(document).ready(function(){
+
+      
       $('#spinner').show();
       $('#dataTable').hide()
     });
@@ -101,8 +106,13 @@
   </div>
 
   <div class="fluid-row">
-    <div class="col-lg-6">
-
+    <div class="col-lg-6" style="margin-top: 15px">
+      <div class="col-sm-12">
+        <p class="legend-width">Legend:</p>
+        <p class="legend-width difference-deletion">Deletion</p> 
+        <p class="legend-width difference-addition">Insertion</p> 
+        <p class=" legend-width matched" style="color: #fff;">Matched Words</p>
+    </div>
 
     </div>
 
@@ -113,9 +123,17 @@
       </div>
 
       <table id="dataTable" class="data-table" style="display: none">
+        <!-- <thead>
+          <tr>
+              <th>Boo1 Id</th>
+              <th>Book2 Id</th>
+              <th>Content 2</th>
+              <th>Content 2</th>
+              <th>Word Matched</th>
+            
+      </thead> -->
 
-
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
           <div class='srt-details instruction'></div>
 
           <p></p>
@@ -123,7 +141,7 @@
         </div>
 
         <div class="col-lg-6"></div>
-    </div>
+    </div> -->
 
 
     <tbody id="test">
@@ -169,6 +187,10 @@
         </td>
         <td>
           <div id="book1Alignment">{{book2Content}}</div>
+        </td>
+        <td style="
+        vertical-align: top;">
+          <div id="wordMatched">{{wordmatched}}</div>
         </td>
       </tr>
     </tbody>
