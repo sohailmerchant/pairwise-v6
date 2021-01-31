@@ -19,7 +19,7 @@
 
         string = string.replace('{' + paramName + '}', replacements[paramName]);
         string
-        console.log(string)
+        //console.log(string)
       }
     }
     return string;

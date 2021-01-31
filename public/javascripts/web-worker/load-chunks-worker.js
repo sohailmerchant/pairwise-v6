@@ -2,6 +2,7 @@
 var dataHolder = {};
 
 onmessage = function (e) {
+  console.log("dataL " + e.data)
   var taskName = e.data[0];
   var data = e.data[1];
   var config = e.data[2];
