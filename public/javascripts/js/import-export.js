@@ -94,11 +94,11 @@
     //tableBody.remove();
     //var inputRows = d3.csvParseRows(window.currentText);
     var inputRows = d3.tsvParseRows(window.currentText);
-    
-    
+    var aa = inputRows[[0].toString().split(",")];
+    console.log(aa)
     if (localStorage.getItem('version') == 1) {
       var col = {
-        name1: 8,
+        name1: 8 ,
         name2: 9,
         content1: 14,
         content2: 15
@@ -114,22 +114,24 @@
         //name2: 10,
         //content1: 8,
         //content2: 18
-        name1: 12,
-        name2: 13,
-        content1: 18,
-        content2: 19,
-        wordmatched: 27
+        name1: aa.findIndex(el => el=='id1'),
+        name2: aa.findIndex(el => el=='id2'),
+        content1: aa.findIndex(el => el=='s1'),
+        content2: aa.findIndex(el => el=='s2'),
+        wordmatched: aa.findIndex(el=>el=='w_match')
+          
 
       };
 
     } else {
 
       var col = {
-        name1: 12,
-        name2: 13,
-        content1: 18,
-        content2: 19,
-        b1: 0
+        name1: aa.findIndex(el => el=='id1'),
+        name2: aa.findIndex(el => el=='id2'),
+        content1: aa.findIndex(el => el=='s1'),
+        content2: aa.findIndex(el => el=='s2'),
+        wordmatched: aa.findIndex(el=>el=='w_match')
+       
 
       };
 
@@ -155,9 +157,10 @@
       //console.log(nodeClone)
       nodeClone.removeAttribute('id');
       
-
+      //var path = "https://sohailmerchant.github.io/lite-reader/output/0385Daraqutni.AhadithMuwatta.Shamela0001518-ara1.html#"
       var params = {
-        book1Name: dataRow[col.name1],
+        //book1Name: () => {return "<a href='"+ path + "'>" + dataRow[col.name1] + "</a>"},
+        book1Name:  dataRow[col.name1],
         book2Name: dataRow[col.name2],
         wordmatched: dataRow[col.wordmatched]
 
