@@ -77,7 +77,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 
   fileStr.split('\n').some(function (row) {
     if (row) {
-      console.log(row)
+      //console.log(row)
       row = row.split('\t');
       var bookId = row[config.meta_data_book_id_cell];
       if (bookIdHash[bookId]) {
@@ -191,7 +191,7 @@ function deNormalizeItemText(text) {
   //text = text.replace(/ /g, '[\\s\\w\\#\\n\\@\\$\\|\\(\\)-]+');
   //text = text.replace(/ /g, '((\\W+(\\d+)?)?(Page\\w+)?)+');       // new from max
   text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
-
+  console.log(text)
   // text = text.replace(/ /g, '(\W+(\d+)?)?(note\w+|<[^<]+>|Page\w+)?');
   // -------------------------------------
 
