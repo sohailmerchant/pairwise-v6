@@ -17,7 +17,7 @@
   exports.forward_chunk_count = 1;
   exports.backward_chunk_count = 1;
   exports.load_more_count = 2;
-  exports.page_chunk_count = 200;
+  exports.page_chunk_count = 300;
   exports.appversion = 2;
 
   // METADATA FILE MAPPING

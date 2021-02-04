@@ -89,6 +89,7 @@ function loadBook(bookName, pageNumber, pageIndex, config) {
   var url = config.book_content_url;
   url = url.replace('{book_id}', bookData.book_id);
   url = url.replace('{page_string}', prefixString(pageNumber, config.page_string_format));
+  console.log(url)
   var xhr = new XMLHttpRequest();
   //console.log(url);
   xhr.open('GET', url, true);
