@@ -3,6 +3,7 @@
 var appversion;
 onmessage = function (e) {
   var srtFileUrl = e.data[0];
+  console.log(srtFileUrl)
   //console.log("url " + JSON.stringify(e.data[0]));
   var bookUris = e.data[1];
   //console.log("data1 " + JSON.stringify(e.data[1]));
@@ -33,6 +34,7 @@ onmessage = function (e) {
 function parseSrtFile(fileStr, config) {
   
   var data = [];
+
 
   var arr = fileStr.split("\n")[0].split('\t');
   var srt_data_mapping = [
@@ -69,6 +71,7 @@ function parseSrtFile(fileStr, config) {
   return data;
 }
 function parseMetaDataFile(fileStr, config, bookUris) {
+  
   var booksToFind = 2;
   var bookIdHash = {};
   config.bookSequence.forEach(function (bookName) {
@@ -81,6 +84,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
       row = row.split('\t');
       var bookId = row[config.meta_data_book_id_cell];
       if (bookIdHash[bookId]) {
+        console.log(bookIdHash[bookId])
         bookIdHash[bookId] = extractRow(row, config.meta_data_mapping);
         booksToFind--;
       }
@@ -94,6 +98,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
 }
 
 function loadXhr(url, callback) {
+
   //url = "http://dev.kitab-project.org/passim01022020/JK000050-ara1.completed/JK000050-ara1.completed_JK000001-ara1.csv"
   var baseUrl = location.href.replace(location.pathname, '/');
   var xhr = new XMLHttpRequest();
@@ -191,7 +196,7 @@ function deNormalizeItemText(text) {
   //text = text.replace(/ /g, '[\\s\\w\\#\\n\\@\\$\\|\\(\\)-]+');
   //text = text.replace(/ /g, '((\\W+(\\d+)?)?(Page\\w+)?)+');       // new from max
   text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
-  console.log(text)
+ // console.log(text)
   // text = text.replace(/ /g, '(\W+(\d+)?)?(note\w+|<[^<]+>|Page\w+)?');
   // -------------------------------------
 
