@@ -2,15 +2,17 @@
 var dataHolder = {};
 
 onmessage = function (e) {
-  console.log("dataL " + e.data)
   var taskName = e.data[0];
   var data = e.data[1];
   var config = e.data[2];
+
+  console.log(e.data)
 
   if (taskName === 'load_new_book') {
 
     config.bookSequence.forEach(function (bookName) {
       var chunkNumber = data[bookName + '_chunk'];
+
       dataHolder[bookName] = {
         event_name: taskName,
         book_id: data[bookName + '_id'],
@@ -19,7 +21,9 @@ onmessage = function (e) {
         dispatching: 0,
         total: 0,
         start_chunk: chunkNumber - config.backward_chunk_count,     // chunk_number cannot be less than 1 (as ms starts from 1)
-        end_chunk: chunkNumber + config.forward_chunk_count
+        end_chunk: chunkNumber + config.forward_chunk_count,
+        filename: data[bookName + '_fn'],
+        
       };
 
       createRequestQueue(bookName, config);
@@ -27,6 +31,7 @@ onmessage = function (e) {
 
   } else if (taskName === 'load_backward_book' || taskName === 'load_forward_book') {
     var requestArgs = e.data[3];
+    console.log(requestArgs)
     var bookName = requestArgs.bookName;
     var bookData = dataHolder[bookName];
     bookData.event_name = taskName;
@@ -49,6 +54,7 @@ onmessage = function (e) {
       if (bookData.pageHistory[pageNumber]) {
         bookResponse(bookData.pageHistory[pageNumber], bookName);
       } else {
+        console.log(config)
         loadBook(bookName, pageNumber, pageIndex, config);
       }
     }
@@ -70,7 +76,7 @@ function bookResponse(text, bookName) {
 }
 function bookOnLoad(text, bookName, pageIndex) {
   var bookData = dataHolder[bookName];
-
+  
   bookData.text[pageIndex] = text;
   if (pageIndex <= bookData.dispatching) {
     bookData.text.slice(bookData.dispatching)
@@ -85,9 +91,11 @@ function bookOnLoad(text, bookName, pageIndex) {
 }
 function loadBook(bookName, pageNumber, pageIndex, config) {
   var bookData = dataHolder[bookName];
+  console.log(bookData)
 
   var url = config.book_content_url;
-  url = url.replace('{book_id}', bookData.book_id);
+  //url = url.replace('{book_id}', bookData.book_id);
+  url = url.replace('{book_id}', bookData.filename);
   url = url.replace('{page_string}', prefixString(pageNumber, config.page_string_format));
   console.log(url)
   var xhr = new XMLHttpRequest();
@@ -116,20 +124,22 @@ function calcPageNumber(chunkNumber, chunkCount) {
   return chunkNumber + chunkCount - chunkNumber % chunkCount;
 }
 function parseText(pageStr, bookName) {
+  
   var bookData = dataHolder[bookName];
   pageStr = filterBookNoise(pageStr);
   var data = {};
   pageStr.split('\n').forEach(function (row) {
     if (row) {
       row = row.split('\t');
+      //console.log("dddd " + row)
      
      var chunkNumber = Number(row[0].replace('ms', ''));
-     console.log("CH:" + chunkNumber)
+     //console.log("CH:" + chunkNumber)
       //var chunkNumber = Number(row[0].split('',''));
       
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
         data[chunkNumber] = row[1];
-        console.log(data[chunkNumber] = row[1])
+        //console.log(data[chunkNumber] = row[1])
       }
     }
   });

@@ -10,7 +10,8 @@
     load_chunks: '/javascripts/web-worker/load-chunks-worker.js',
     load_inial_data: '/javascripts/web-worker/load-initial-data-worker.js'
   };
-  exports.book_content_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-ara1-{page_string}';
+  exports.book_content_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-{page_string}';
+  //exports.book_content_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-ara1-{page_string}';
   exports.book_github_url = 'https://raw.githubusercontent.com/OpenITI/i.mech/master/data/{book_id}-ara1';
   exports.page_string_format = '00000';
   exports.chunk_size = 300;

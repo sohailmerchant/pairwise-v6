@@ -266,7 +266,9 @@
 			$(window).load(function () {
 
 				$('#spinner').hide();
+				
 				var book_names = '<%= names %>'.split("_");
+				
 				var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/, "");
 				bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
 				bn2 = book_names[1].replace(/(\-ara1)|(\.ara1)/, "");

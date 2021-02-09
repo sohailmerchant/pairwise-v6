@@ -8,6 +8,8 @@
 
   function renderVisual(srtFileName, bookUris, appversion) {
     config.appversion = appversion;
+    var filenames = srtFileName.replace('.csv','').split('_');
+    console.log(filenames)
     //console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
     var workerConfig = utils.pick([
       'bookSequence', 'meta_data_path', 'meta_data_mapping', 'meta_data_book_id_cell', 'srt_data_mapping', 'appversion', 'srt_data_mappingV2'
@@ -17,7 +19,6 @@
     var loadInitialDataWorker = new Worker(config.web_worker_path.load_inial_data);
     loadInitialDataWorker.onmessage = onInitData;
 
-    console.log(config.appversion);
 
 
     // book1: Top Bar Chart (x0)
@@ -50,13 +51,13 @@
     // use mapDataWithIndex function when there is no header
     // d3.tsv('data-live.txt', mapData, function (error, data) {
     var srtDataUrl = utils.replaceParams(config.srt_data_path, { 'file_name': srtFileName });
+    
     loadInitialDataWorker.postMessage([srtDataUrl, bookUris, workerConfig]);
 
     graph.createChart();
     // graph.setLayout();
 
     function onInitData(e) {
-      console.log("onInit" + e.data[0])
 
       var srtData = e.data[0];
       var selectedMetadata = e.data[1];
@@ -135,6 +136,7 @@
 
     // --- Panel Events [START] :::
     function openPanel(itemData) {
+      console.log(itemData)
       if (graph.animating) return;
 
       isPanelOpened = true;
@@ -144,6 +146,8 @@
         d3.select('#book-content-container').style('opacity', null);
       }, duration1);
 
+      itemData['book1_fn'] = filenames[0];
+      itemData['book2_fn'] = filenames[1]
       dataLoader.loadBooks(itemData);
     }
 
