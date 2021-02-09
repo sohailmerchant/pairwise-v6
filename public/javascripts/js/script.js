@@ -56,6 +56,11 @@
 
     graph.createChart();
     // graph.setLayout();
+    function pad(n, width, z) {
+      z = z || '0';
+      n = n + '';
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
 
     function onInitData(e) {
 
@@ -63,6 +68,7 @@
       var selectedMetadata = e.data[1];
 
       graph.setMaxValue(selectedMetadata.map(function (d) {
+        console.log(d)
         return d.book_chunk_count;
       }));
 
@@ -86,7 +92,11 @@
         bookDetails.selectAll('div')
         .append('p').attr('class', 'label')
         .html(function (d) { 
-         return "Book Title: " + "<a href='" + d.book_uri + "' target=_blank>" + d.book_title + "</a>" 
+
+        var u = pad(Math.ceil(d.author_died / 25) * 25, 4)
+        var github_url = 'https://raw.githubusercontent.com/OpenITI/' + u + 'AH' + '/master/' + d.book_uri
+                   
+         return "Book Title: " + "<a href='" + github_url + "' target=_blank>" + d.book_title + "</a>" 
         
         }); 
       bookDetails.selectAll('div')

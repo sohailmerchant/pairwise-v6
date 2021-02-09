@@ -71,6 +71,20 @@ function parseSrtFile(fileStr, config) {
   return data;
 }
 function parseMetaDataFile(fileStr, config, bookUris) {
+  console.log(config)
+  var arr1 = fileStr.split("\n")[0].split('\t');
+  console.log(arr1)
+  var meta_data_mapping = [
+    { key: 'book_id', cell: arr1.findIndex(el => el=='id'), type: 'string' },
+    { key: 'author_died', cell: arr1.findIndex(el => el=='date'), type: 'string' },
+    { key: 'book_author', cell: arr1.findIndex(el => el=='author_lat'), type: 'string' },
+    { key: 'book_title', cell: arr1.findIndex(el => el=='title_lat'), type: 'string' },
+    { key: 'book_word_count', cell: arr1.findIndex(el => el=='tok_length'), type: 'number' },
+    //chunk_size
+    { key: 'book_chunk_count', cell: arr1.findIndex(el => el=='tok_length'), type: 'ceil', use: config.meta_data_mapping[5].use },
+    { key: 'book_uri', cell: arr1.findIndex(el => el=='url'), type: 'string' },
+  ];
+
   
   var booksToFind = 2;
   var bookIdHash = {};
@@ -82,10 +96,11 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     if (row) {
       //console.log(row)
       row = row.split('\t');
-      var bookId = row[config.meta_data_book_id_cell];
+      var bookId = row[meta_data_mapping[0].cell];
+      
       if (bookIdHash[bookId]) {
         console.log(bookIdHash[bookId])
-        bookIdHash[bookId] = extractRow(row, config.meta_data_mapping);
+        bookIdHash[bookId] = extractRow(row, meta_data_mapping);
         booksToFind--;
       }
     }
