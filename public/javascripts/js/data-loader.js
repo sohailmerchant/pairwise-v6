@@ -147,19 +147,19 @@
   }
 
   function pageNumberFormat(text) {
-
-    var re = /(Page(?:End|Beg)?)(V\d{2})(P\d+\s)/g; // some page numbers have PageEndVxxPxxx or PageBegVxxPxxx structure
+    var re = /(Page)(V\d{2})(P\d+\s)/g;
+    //var re = /(Page(?:End|Beg)?)(V\d{2})(P\d+\s)/g; // some page numbers have PageEndVxxPxxx or PageBegVxxPxxx structure
     var match = re.exec(text);
     //Vol. 5, p.22
     if (match) {
       var volnumber = parseInt(match[2].replace('V', ''), 10);
       var pagenumber = parseInt(match[3].replace('P', ''), 10);
-    //} // having the bracket here will create an error in the next line if the chunk does not contain a page number
+    } // having the bracket here will create an error in the next line if the chunk does not contain a page number
     text = text.replace(re, "<br/><a class='page-number' title='archive.org' href='https://archive.org/' target='_blank'>" +
       "Vol." + volnumber + ", p." + pagenumber + "</a> <br/>");
     }
       return text;
-  }
+  
 
   function quranVerseFormat(text){
     var re = /@QB@(.*)@QE@/g;
@@ -175,8 +175,9 @@
 
   function selectPara(bookName, currentPara, content, paraLabel) {
     var itemText = selectedMatchData[bookName + '_content'];
-    itemText = itemText.replace(/ +/g, '[\\W\\da-zA-Z]+');
-    itemText = new RegExp(itemText, 'g');
+    itemText = itemText.replace(' ', '[\W\da-zA-Z]+');
+    //itemText = itemText.replace(/ +/g, '[\\W\\da-zA-Z]+');
+    //itemText = new RegExp(itemText, 'g');
     //console.log("iii" + itemText)
 
     paraLabel.attr('class', 'milestone-id selected')
