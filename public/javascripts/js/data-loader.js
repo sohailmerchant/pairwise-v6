@@ -175,7 +175,7 @@
 
   function selectPara(bookName, currentPara, content, paraLabel) {
     var itemText = selectedMatchData[bookName + '_content'];
-    itemText = itemText.replace(' ', '[\\W\\da-zA-Z]+');
+    itemText = itemText.replace(/ +/g, '[\\W\\da-zA-Z]+');
     itemText = new RegExp(itemText, 'g');
     //console.log("iii" + itemText)
 
