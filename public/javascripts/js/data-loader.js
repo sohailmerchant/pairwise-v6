@@ -18,11 +18,11 @@
   //exports.IsColorMasking = IsColorMasking;
 
   function pickWorkerData() {
-
+   
     return utils.pick([
       'book1_id', 'book1_chunk', 'book1_fn', 'book2_id', 'book2_chunk', 'book2_fn'
     ], {}, selectedMatchData);
-
+   
   }
   function loadBackwardContent(bookName) {
     var workerArgs = {
@@ -32,7 +32,7 @@
     };
 
     var workerData = pickWorkerData();
-
+    
     myWorker.postMessage(['load_backward_book', workerData, workerConfig, workerArgs]);
   }
   function loadForwardContent(bookName) {
@@ -43,12 +43,12 @@
     };
 
     var workerData = pickWorkerData();
-
+    
     myWorker.postMessage(['load_forward_book', workerData, workerConfig, workerArgs]);
   }
 
   function loadBooks(_selectedMatchData) {
-
+    
     completedDataCount = 0;
     selectedMatchData = _selectedMatchData;
 
@@ -65,24 +65,24 @@
     console.log(workerData)
     myWorker.postMessage(['load_new_book', workerData, workerConfig]);
   }
-
+  
   function workerMessage(e) {
     var taskName = e.data[0];
     var status = e.data[1];
     var textObj = e.data[2];
     var bookName = e.data[3];
+    
 
-
-
-
+    
+    
     var selectedChunkId = selectedMatchData[bookName + '_chunk'];
     var contentNodeD3 = d3.select('#' + bookName + 'Content');
     var prependReferenceD3;
 
     if (taskName === 'load_new_book') {
       loadedChunkRange[bookName] = e.data[4];
-
-
+      
+      
     }
     else if (taskName === 'load_backward_book') {
       loadedChunkRange[bookName][0] = e.data[4][0];
@@ -148,16 +148,16 @@
 
   function pageNumberFormat(text) {
 
-    var re = /(Page(?:End|Beg)?)(V\d{2})(P\d+\s)/g; // some page numbers have PageEndVxxPxxx or PageBegVxxPxxx structure
+    var re = /(Page)(V\d{2})(P\d+\s)/g;
     var match = re.exec(text);
-    //Vol. 5, p.22
+    //Vol. 5, p.22 
     if (match) {
       var volnumber = parseInt(match[2].replace('V', ''), 10);
       var pagenumber = parseInt(match[3].replace('P', ''), 10);
-    //} // having the bracket here will create an error in the next line if the chunk does not contain a page number
+    }
     text = text.replace(re, "<br/><a class='page-number' title='archive.org' href='https://archive.org/' target='_blank'>" +
       "Vol." + volnumber + ", p." + pagenumber + "</a> <br/>");
-    }
+
       return text;
   }
 
@@ -175,8 +175,6 @@
 
   function selectPara(bookName, currentPara, content, paraLabel) {
     var itemText = selectedMatchData[bookName + '_content'];
-    itemText = itemText.replace(/ +/g, '[\\W\\da-zA-Z]+');
-    itemText = new RegExp(itemText, 'g');
     //console.log("iii" + itemText)
 
     paraLabel.attr('class', 'milestone-id selected')
