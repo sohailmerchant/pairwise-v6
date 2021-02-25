@@ -175,9 +175,9 @@
 
   function selectPara(bookName, currentPara, content, paraLabel) {
     var itemText = selectedMatchData[bookName + '_content'];
-    itemText = itemText.replace(/ +/g, '[\\W\\da-zA-Z]+');
-    itemText = new RegExp(itemText, 'g');
-    //console.log("iii" + itemText)
+    /*console.log("iii" + itemText);
+
+    console.log("content: "+content);*/
 
     paraLabel.attr('class', 'milestone-id selected')
     currentPara.attr('class', 'selection-chunk');

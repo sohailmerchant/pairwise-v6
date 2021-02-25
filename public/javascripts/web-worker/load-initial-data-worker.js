@@ -15,8 +15,8 @@ onmessage = function (e) {
 
 
   loadXhr(srtFileUrl, onSrtTextLoaded);
-  
-   
+
+
   function onSrtTextLoaded(srtDataText) {
     var srtData;
     loadXhr(config.meta_data_path, function (metaDataText) {
@@ -32,7 +32,7 @@ onmessage = function (e) {
 
 
 function parseSrtFile(fileStr, config) {
-  
+
   var data = [];
 
 
@@ -85,7 +85,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     { key: 'book_uri', cell: arr1.findIndex(el => el=='url'), type: 'string' },
   ];
 
-  
+
   var booksToFind = 2;
   var bookIdHash = {};
   config.bookSequence.forEach(function (bookName) {
@@ -97,7 +97,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
       //console.log(row)
       row = row.split('\t');
       var bookId = row[meta_data_mapping[0].cell];
-      
+
       if (bookIdHash[bookId]) {
         console.log(bookIdHash[bookId])
         bookIdHash[bookId] = extractRow(row, meta_data_mapping);
@@ -151,7 +151,7 @@ function extractRow(row, mapping) {
 
   //console.log("r1: " + row)
   //console.log("m1: " + mapping)
-  
+
   return mapping.reduce(function (output, schema) {
     //console.log(typesForConversion[schema.type])
     var process = typesForConversion[schema.type];
@@ -159,7 +159,7 @@ function extractRow(row, mapping) {
     process(output, row[schema.cell], schema);
     //console.log(row)
     return output;
-    
+
   }, {});
 }
 
@@ -210,10 +210,13 @@ function deNormalizeItemText(text) {
 
   //text = text.replace(/ /g, '[\\s\\w\\#\\n\\@\\$\\|\\(\\)-]+');
   //text = text.replace(/ /g, '((\\W+(\\d+)?)?(Page\\w+)?)+');       // new from max
-  text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
+  //text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
+  //text = text.replace(/ +/g, '[\\W\\da-zA-Z_]+?'); // new from Peter; does not work because \W includes Arabic letters in javascript
+  text = text.replace(/ +/g, '(?:[^\\p{Letter}]|[a-zA-Z])+?'); // new from Peter: any non-letter character (incl. numbers, underscores)
  // console.log(text)
   // text = text.replace(/ /g, '(\W+(\d+)?)?(note\w+|<[^<]+>|Page\w+)?');
   // -------------------------------------
 
-  return new RegExp(text);
+  //return new RegExp(text);
+  return new RegExp(text, "gu"); // add unicode flag to make \p{} structure work
 }
