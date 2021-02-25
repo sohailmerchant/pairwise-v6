@@ -9,8 +9,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "cjs-module": "^1.5.0",
     "cookie-parser": "~1.4.3",
-    "csv-parser": "latest",
+    "csv-parser": "^3.0.0",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
