@@ -71,6 +71,7 @@ function parseSrtFile(fileStr, config) {
   return data;
 }
 function parseMetaDataFile(fileStr, config, bookUris) {
+  /* // commented this addition out in merge conflict resolution step; not sure if that was the correct solution
   console.log(config)
   var arr1 = fileStr.split("\n")[0].split('\t');
   console.log(arr1)
@@ -83,9 +84,8 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     //chunk_size
     { key: 'book_chunk_count', cell: arr1.findIndex(el => el=='tok_length'), type: 'ceil', use: config.meta_data_mapping[5].use },
     { key: 'book_uri', cell: arr1.findIndex(el => el=='url'), type: 'string' },
-  ];
-
-
+  ];*/
+  
   var booksToFind = 2;
   var bookIdHash = {};
   config.bookSequence.forEach(function (bookName) {
@@ -96,11 +96,14 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     if (row) {
       //console.log(row)
       row = row.split('\t');
-      var bookId = row[meta_data_mapping[0].cell];
-
+      /*
+      var bookId = row[meta_data_mapping[0].cell]; // commented this addition out in merge conflict resolution step; not sure if that was the correct solution
+      */
+      var bookId = row[config.meta_data_book_id_cell];
+      
       if (bookIdHash[bookId]) {
         console.log(bookIdHash[bookId])
-        bookIdHash[bookId] = extractRow(row, meta_data_mapping);
+        bookIdHash[bookId] = extractRow(row, config.meta_data_mapping);
         booksToFind--;
       }
     }
