@@ -15,8 +15,8 @@ onmessage = function (e) {
 
 
   loadXhr(srtFileUrl, onSrtTextLoaded);
-  
-   
+
+
   function onSrtTextLoaded(srtDataText) {
     var srtData;
     loadXhr(config.meta_data_path, function (metaDataText) {
@@ -32,7 +32,7 @@ onmessage = function (e) {
 
 
 function parseSrtFile(fileStr, config) {
-  
+
   var data = [];
 
 
@@ -71,6 +71,20 @@ function parseSrtFile(fileStr, config) {
   return data;
 }
 function parseMetaDataFile(fileStr, config, bookUris) {
+  /* // commented this addition out in merge conflict resolution step; not sure if that was the correct solution
+  console.log(config)
+  var arr1 = fileStr.split("\n")[0].split('\t');
+  console.log(arr1)
+  var meta_data_mapping = [
+    { key: 'book_id', cell: arr1.findIndex(el => el=='id'), type: 'string' },
+    { key: 'author_died', cell: arr1.findIndex(el => el=='date'), type: 'string' },
+    { key: 'book_author', cell: arr1.findIndex(el => el=='author_lat'), type: 'string' },
+    { key: 'book_title', cell: arr1.findIndex(el => el=='title_lat'), type: 'string' },
+    { key: 'book_word_count', cell: arr1.findIndex(el => el=='tok_length'), type: 'number' },
+    //chunk_size
+    { key: 'book_chunk_count', cell: arr1.findIndex(el => el=='tok_length'), type: 'ceil', use: config.meta_data_mapping[5].use },
+    { key: 'book_uri', cell: arr1.findIndex(el => el=='url'), type: 'string' },
+  ];*/
   
   var booksToFind = 2;
   var bookIdHash = {};
@@ -82,7 +96,11 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     if (row) {
       //console.log(row)
       row = row.split('\t');
+      /*
+      var bookId = row[meta_data_mapping[0].cell]; // commented this addition out in merge conflict resolution step; not sure if that was the correct solution
+      */
       var bookId = row[config.meta_data_book_id_cell];
+      
       if (bookIdHash[bookId]) {
         console.log(bookIdHash[bookId])
         bookIdHash[bookId] = extractRow(row, config.meta_data_mapping);
@@ -136,7 +154,7 @@ function extractRow(row, mapping) {
 
   //console.log("r1: " + row)
   //console.log("m1: " + mapping)
-  
+
   return mapping.reduce(function (output, schema) {
     //console.log(typesForConversion[schema.type])
     var process = typesForConversion[schema.type];
@@ -144,7 +162,7 @@ function extractRow(row, mapping) {
     process(output, row[schema.cell], schema);
     //console.log(row)
     return output;
-    
+
   }, {});
 }
 
@@ -195,10 +213,13 @@ function deNormalizeItemText(text) {
 
   //text = text.replace(/ /g, '[\\s\\w\\#\\n\\@\\$\\|\\(\\)-]+');
   //text = text.replace(/ /g, '((\\W+(\\d+)?)?(Page\\w+)?)+');       // new from max
-  text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
+  //text = text.replace(/ /g, '(\\W+(\\d+)?)?(note\\w+|Page\\w+)?');  // old from max
+  //text = text.replace(/ +/g, '[\\W\\da-zA-Z_]+?'); // new from Peter; does not work because \W includes Arabic letters in javascript
+  text = text.replace(/ +/g, '(?:[^\\p{Letter}]|[a-zA-Z])+?'); // new from Peter: any non-letter character (incl. numbers, underscores)
  // console.log(text)
   // text = text.replace(/ /g, '(\W+(\d+)?)?(note\w+|<[^<]+>|Page\w+)?');
   // -------------------------------------
 
-  return new RegExp(text);
+  //return new RegExp(text);
+  return new RegExp(text, "gu"); // add unicode flag to make \p{} structure work
 }
