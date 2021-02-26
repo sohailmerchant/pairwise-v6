@@ -8,7 +8,7 @@
 
   function renderVisual(srtFileName, bookUris, appversion) {
     config.appversion = appversion;
-    var filenames = srtFileName.replace('.csv','').split('_');
+    var filenames = srtFileName.replace('.csv', '').split('_');
     console.log(filenames)
     //console.log('renderVis' + srtFileName +' '+ JSON.stringify(bookUris));
     var workerConfig = utils.pick([
@@ -51,11 +51,17 @@
     // use mapDataWithIndex function when there is no header
     // d3.tsv('data-live.txt', mapData, function (error, data) {
     var srtDataUrl = utils.replaceParams(config.srt_data_path, { 'file_name': srtFileName });
-    
+
     loadInitialDataWorker.postMessage([srtDataUrl, bookUris, workerConfig]);
 
     graph.createChart();
     // graph.setLayout();
+
+    function pad(n, width, z) {
+      z = z || '0';
+      n = n + '';
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
 
     function onInitData(e) {
 
@@ -83,26 +89,29 @@
 
         .enter().append('div').attr('class', 'books-details')
 
-        bookDetails.selectAll('div')
-        .append('p').attr('class', 'label')
-        .html(function (d) { 
-         return "Book Title: " + "<a href='" + d.book_uri + "' target=_blank>" + d.book_title + "</a>" 
-        
-        }); 
       bookDetails.selectAll('div')
         .append('p').attr('class', 'label')
-        
+        .html(function (d) {
+          var u = pad(Math.ceil(d.author_died / 25) * 25, 4)
+          var github_url = 'https://raw.githubusercontent.com/OpenITI/' + u + 'AH' + '/master/' + d.book_uri
+          return "Book Title: " + "<a href='" + github_url + "' target=_blank>" + d.book_title + "</a>"
+
+
+        });
+      bookDetails.selectAll('div')
+        .append('p').attr('class', 'label')
+
         .text(function (d) { return 'Book Author: ' + d.book_author.replace(/([A-Z])/g, ' $1').trim(); });
 
       bookDetails.selectAll('div')
         .append('p').attr('class', 'label')
-        .text(function (d) { return 'Book ID: ' + d.book_id});
+        .text(function (d) { return 'Book ID: ' + d.book_id });
 
       bookDetails.selectAll('div')
         .append('p').attr('class', 'label')
         .text(function (d) { return 'Word Count: ' + d.book_word_count; });
 
-     
+
 
 
 
@@ -174,7 +183,7 @@
       n = n + '';
       return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
-   
+
 
     // --- Panel Events [END] :::
   };
