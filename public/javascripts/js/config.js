@@ -5,7 +5,7 @@
   exports.srt_data_path = 'data-file/{file_name}';
   //exports.srt_data_path = 'C:\\Downloads\\data-file-new\\{file_name}';
   //exports.meta_data_path = 'data-file/metadata-april2020.txt';
-  exports.meta_data_path = 'data-file/OpenITI_metadata_2020-2-3_wNoor_merged.txt';
+  exports.meta_data_path = 'data-file/OpenITI_metadata_2021-1-4_merged_wNoor.txt';
   exports.web_worker_path = {
     load_chunks: '/javascripts/web-worker/load-chunks-worker.js',
     load_inial_data: '/javascripts/web-worker/load-initial-data-worker.js'
