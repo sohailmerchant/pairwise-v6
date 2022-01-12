@@ -107,6 +107,7 @@ function loadBook(bookName, pageNumber, pageIndex, config) {
         bookData.pageHistory[pageNumber] = xhr.responseText;
         bookOnLoad(xhr.responseText, bookName, pageIndex);
       } else {
+        bookOnLoad("not found", bookName, pageIndex);
         console.error(xhr.statusText);
       }
     }

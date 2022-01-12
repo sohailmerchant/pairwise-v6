@@ -109,6 +109,23 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     }
     return booksToFind <= 0;
   });
+  
+  console.log("Check for books that were not found in metadata:");
+  for (const [bookId, val] of Object.entries(bookIdHash)) {
+    if (val === true) {  // not replaced by metadata yet
+      console.log("Adding default metadata for missing book " + bookId);
+      bookIdHash[bookId] = {
+        book_id: bookId, 
+        author_died: "not in metadata",
+        book_author: "not in metadata",
+        book_title: "not in metadata",
+        book_word_count: 0,
+        book_chunk_count: 0,
+        book_uri: bookId};
+      console.log(bookIdHash[bookId]);
+    }
+  }
+  
 
   return config.bookSequence.map(function (bookName) {
     return bookIdHash[bookUris[bookName]];
