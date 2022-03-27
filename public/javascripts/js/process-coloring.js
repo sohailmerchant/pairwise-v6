@@ -3,6 +3,8 @@
 window.processColoring = (function () {
 
   return function processColoring(text1, text2, colorClass) {
+    //console.log(text1, text2)
+   
     
     var output = '';
 

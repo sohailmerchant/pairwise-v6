@@ -20,6 +20,7 @@
     someotherTotal: []
 
   };
+  
   function ConvertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     var str = '';
@@ -100,8 +101,8 @@
       var col = {
         name1: 8 ,
         name2: 9,
-        content1: 14,
-        content2: 15
+        content1: 9,
+        content2: 10
 
       };
 
@@ -143,7 +144,7 @@
        processRow(inputRows.shift(), true);    // ##1 line deals first row as header
     }
     inputRows.forEach(function (dataRow) {
-      
+      //console.log(dataRow)
       processRow(dataRow, window.isMarkingsOn);
       aggregatedTotals.totalWordMatch.push(parseInt(dataRow[col.b1]));
     });
@@ -167,9 +168,10 @@
 
       };
       if (isMarkingOn) {
+        console.log(col.content1)
         params.book1Content = window.processColoring(dataRow[col.content1], dataRow[col.content2], 'difference-deletion');
-        params.book2Content = window.processColoring(dataRow[col.content2], dataRow[col.content1], 'difference-addition');
-        
+        params.book2Content = window.processColoring(dataRow[col.content2], dataRow[col.content1], 'difference-addition');   
+
       } else {
         params.book1Content = dataRow[col.content1];
         params.book2Content = dataRow[col.content2];
