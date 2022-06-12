@@ -13,7 +13,7 @@
     "cookie-parser": "~1.4.3",
     "csv-parser": "^3.0.0",
     "debug": "~2.6.9",
-    "ejs": "~2.5.7",
+    "ejs": "~3.1.7",
     "express": "~4.16.0",
     "express-formidable": "~1.0.0",
     "formidable": "1.2.1",
