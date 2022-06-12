@@ -6,13 +6,12 @@ const formidable = require('formidable');
     // you have a file
     router.post('/visualise', (req, res) => {
         var form = new formidable.IncomingForm();
-
         form.parse(req);
 
         form.on('fileBegin', function (name, file) {
           //file.path = __dirname + '/../public/data-file/book1_book2.srt'; //+ file.name;
            file.path = __dirname + '/../public/data-file/'+ file.name;
-           
+           console.log(file) 
            
             
         });

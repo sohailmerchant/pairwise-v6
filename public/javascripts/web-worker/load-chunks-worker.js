@@ -98,6 +98,7 @@ function loadBook(bookName, pageNumber, pageIndex, config) {
   url = url.replace('{book_id}', bookData.filename);
   url = url.replace('{page_string}', prefixString(pageNumber, config.page_string_format));
   console.log(url)
+  
   var xhr = new XMLHttpRequest();
   //console.log(url);
   xhr.open('GET', url, true);
@@ -127,7 +128,9 @@ function calcPageNumber(chunkNumber, chunkCount) {
 function parseText(pageStr, bookName) {
   
   var bookData = dataHolder[bookName];
+
   pageStr = filterBookNoise(pageStr);
+
   var data = {};
   pageStr.split('\n').forEach(function (row) {
     if (row) {
@@ -135,15 +138,18 @@ function parseText(pageStr, bookName) {
       //console.log("dddd " + row)
      
      var chunkNumber = Number(row[0].replace('ms', ''));
+
      //console.log("CH:" + chunkNumber)
       //var chunkNumber = Number(row[0].split('',''));
       
       if (chunkNumber >= bookData.start_chunk && chunkNumber <= bookData.end_chunk) {
         data[chunkNumber] = row[1];
+
         //console.log(data[chunkNumber] = row[1])
       }
     }
   });
+
   //console.log("load chunks" + data);
   
   return data;
