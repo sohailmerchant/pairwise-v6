@@ -67,14 +67,14 @@
 
       var srtData = e.data[0];
       var selectedMetadata = e.data[1];
-      
+
       // get highest milestoneID from srtData :
       // (to be used if the book is not found in the metadata)
-      for (var i=0; i<selectedMetadata.length; i++) {
-        var chunk_id = "book" + (i+1) + "_chunk";
+      for (var i = 0; i < selectedMetadata.length; i++) {
+        var chunk_id = "book" + (i + 1) + "_chunk";
         var lastChunk = 0;
-        for (const row of srtData){
-          if (row[chunk_id] > lastChunk){
+        for (const row of srtData) {
+          if (row[chunk_id] > lastChunk) {
             lastChunk = row[chunk_id];
           }
         }
@@ -85,7 +85,7 @@
       console.log(selectedMetadata);
 
       graph.setMaxValue(selectedMetadata.map(function (d) {
-        if (d.book_chunk_count){
+        if (d.book_chunk_count) {
           return d.book_chunk_count;
         } else {
           return d.last_reused_chunk;

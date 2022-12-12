@@ -276,12 +276,13 @@
 				$('#spinner').hide();
 				
 				var book_names = '<%= names %>'.split("_");
-				
-				var bn1 = book_names[0].replace(/(\-ara1)|(\.ara1)/, "");
+				var bn1 = book_names[0].match(/(\w+)-[a-z]{3}\d/)[1];
 				bn1 = bn1.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
-				bn2 = book_names[1].replace(/(\-ara1)|(\.ara1)/, "");
+				bn2 = book_names[1].match(/(\w+)-[a-z]{3}\d/)[1];
 				bn2 = bn2.replace(/(\.completed)|(\.inProgress)|(\.mARkdown)/, "");
 				bn2 = bn2.replace(/(\.csv)|(\.srt)|(\.completed)/, "");
+
+				console.log(bn1, bn2)
 
 				//book_names = book_names.split("-");
 				var filename = '<%= names %>';
