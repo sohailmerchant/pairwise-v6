@@ -113,7 +113,7 @@
         .append('p').attr('class', 'label')
         .html(function (d) {
           var u = pad(Math.ceil(d.author_died / 25) * 25, 4)
-          var github_url = 'https://raw.githubusercontent.com/OpenITI/' + u + 'AH' + '/master/' + d.book_uri
+          var github_url = 'https://raw.githubusercontent.com/OpenITI/' + u + 'AH' + '/master' + d.book_uri.replace('..', '')
           return "Book Title: " + "<a href='" + github_url + "' target=_blank>" + d.book_title + "</a>"
 
 

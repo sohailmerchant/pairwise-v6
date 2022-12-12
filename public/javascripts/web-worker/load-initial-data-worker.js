@@ -82,7 +82,7 @@ function parseMetaDataFile(fileStr, config, bookUris) {
     { key: 'book_word_count', cell: arr1.findIndex(el => el == 'tok_length'), type: 'number' },
     //chunk_size
     { key: 'book_chunk_count', cell: arr1.findIndex(el => el == 'tok_length'), type: 'ceil', use: config.meta_data_mapping[5].use },
-    { key: 'book_uri', cell: arr1.findIndex(el => el == 'url'), type: 'string' },
+    { key: 'book_uri', cell: arr1.findIndex(el => el == 'local_path'), type: 'string' },
   ];
 
   var booksToFind = 2;
