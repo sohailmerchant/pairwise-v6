@@ -39,14 +39,14 @@ function parseSrtFile(fileStr, config) {
   var arr = fileStr.split("\n")[0].split('\t');
   var srt_data_mapping = [
     { key: 'book1_id', key2: 'book1_chunk', cell: arr.findIndex(el => el == 'id1'), type: 'extract' },
-    { key: 'book1_y1', cell: arr.findIndex(el => el == 'b1'), type: 'number' },
-    { key: 'book1_y2', cell: arr.findIndex(el => el == 'e1'), type: 'number' },
+    { key: 'book1_y1', cell: arr.findIndex(el => el == 'bw1'), type: 'number' },
+    { key: 'book1_y2', cell: arr.findIndex(el => el == 'ew1'), type: 'number' },
     { key: 'book1_raw_content', cell: arr.findIndex(el => el == 's1'), type: 'string' },
     { key: 'book1_content', cell: arr.findIndex(el => el == 's1'), type: 'normalizedText' },
 
     { key: 'book2_id', key2: 'book2_chunk', cell: arr.findIndex(el => el == 'id2'), type: 'extract' },
-    { key: 'book2_y1', cell: arr.findIndex(el => el == 'b2'), type: 'number' },
-    { key: 'book2_y2', cell: arr.findIndex(el => el == 'e2'), type: 'number' },
+    { key: 'book2_y1', cell: arr.findIndex(el => el == 'bw2'), type: 'number' },
+    { key: 'book2_y2', cell: arr.findIndex(el => el == 'ew2'), type: 'number' },
     { key: 'book2_raw_content', cell: arr.findIndex(el => el == 's2'), type: 'string' },
     { key: 'book2_content', cell: arr.findIndex(el => el == 's2'), type: 'normalizedText' }
   ];
