@@ -22,11 +22,11 @@
   var clipPath = "url('#clipDrawing')";
 
   var margin = {
-      top: 40,
-      right: 20,
-      bottom: 20,
-      left: 60,
-    },
+    top: 40,
+    right: 20,
+    bottom: 20,
+    left: 60,
+  },
     padding = {
       top: 40,
       right: 0,
@@ -69,7 +69,7 @@
   var brushHandle = d3.brushX().on("end", brushEnded);
 
   var xIdentityDomain, currentXDomain, duration1 = 700;
-  
+
   var toolTipDiv;
 
   function initData(data) {
@@ -422,25 +422,10 @@
   function showToolTip(d1) {
     var html =
 
-    `<strong>Book 1</strong> <br/>MS# ${d1.book1_chunk} 
-     <br/> Char Positions(${d1.book1_y1}-${d1.book1_y2})
+      `<strong>Book 1</strong> <br/>MS# ${d1.book1_chunk} 
+     <br/> Token Positions(${d1.book1_y1}-${d1.book1_y2})
      <br/> <strong>Book 2</strong><br/> MS# ${d1.book2_chunk}
-     <br/> Char Position (${ d1.book2_y1}-${d1.book2_y2})`
-      // "Book1: #" +
-      // d1.book1_chunk +
-      // " (" +
-      // d1.book1_y1 +
-      // "-" +
-      // d1.book1_y2 +
-      // ")<br/>" +
-      // "Book2: #" +
-      // d1.book2_chunk +
-      // "" +
-      // " (" +
-      // d1.book2_y1 +
-      // "-" +
-      // d1.book2_y2 +
-      // ")";
+     <br/> Token Position (${d1.book2_y1}-${d1.book2_y2})`
 
     toolTipDiv.style("display", null);
 
